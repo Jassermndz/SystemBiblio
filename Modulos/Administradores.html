@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Administrador</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../css/administradores.css">
+    <link rel="icon" type="image/png" href="img/icon.ico"/>
+</head>
+
+<body>
+    <nav class="sidebar">
+        <div class="profile">
+            <img id="user-image" src="default-image.jpg" alt="Usuario" style="width: 150px; height: 150px; object-fit: cover;">
+            <h4 id="user-name">Cargando...</h4>
+            <p id="user-role">Cargando...</p>
+        </div>
+        <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link" href="home.html"> <i class="fas fa-home"></i> Inicio</a></li>
+            <li class="nav-item"><a class="nav-link" href="AgregarLibros.html"> <i class="fas fa-book"></i> Agregar Libros</a></li>
+            <li class="nav-item"><a class="nav-link" href="prestamos.html"> <i class="fas fa-book-reader"></i> Préstamos</a></li>
+            <li class="nav-item"><a class="nav-link" href="#"> <i class="fas fa-undo"></i> Devoluciones</a></li>
+            <li class="nav-item"><a class="nav-link" href="Categorias.html"> <i class="fas fa-list"></i> Categorías</a></li>
+            <li class="nav-item"><a class="nav-link" href="#"> <i class="fas fa-users"></i> Estudiantes</a></li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user-shield"></i> Administradores
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="CrearUsuarios.html">Crear Usuario</a></li>
+                </ul>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="Configuracion.html"> <i class="fas fa-cog"></i> Configuracion</li>
+        </ul>
+    </nav>
+
+    <div class="main-content">
+        <h2 class="mt-4">Crear Administrador</h2>
+        <div class="form-container">
+            <form action="../Consultas/insertar_administrador.php" method="POST" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="usuario" class="form-label">Usuario</label>
+                    <input type="text" class="form-control" id="usuario" name="usuario" required>
+                </div>
+                <div class="mb-3">
+                    <label for="contrasena" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" id="contrasena" name="contrasena" required>
+                </div>
+                <div class="mb-3">
+                    <label for="rol" class="form-label">Rol</label>
+                    <select class="form-select" id="rol" name="rol" required>
+                        <option value="Administrador">Administrador</option>
+                        <option value="Empleado">Empleado</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="imagen" class="form-label">Imagen de Perfil</label>
+                    <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*">
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-success">Crear Administrador</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('../Consultas/datos_usuario.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        console.error(data.error);
+                        return;
+                    }
+        
+                    document.getElementById('user-name').innerText = data.usuario;
+                    document.getElementById('user-role').innerText = data.rol;
+        
+                    const userImage = document.getElementById('user-image');
+                    userImage.src = data.imagen ? data.imagen : 'default-image.jpg';
+                })
+                .catch(error => {
+                    console.error('Error al cargar los datos del usuario:', error);
+                });
+        });
+            </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        fetch('../Consultas/auth.php', { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+            .then(response => response.json())
+            .then(data => {
+                if (!data.authenticated) {
+                    window.location.href = "/SystemBiblio/index.html";
+                }
+            })
+            .catch(error => console.error('Error verificando la sesión:', error));
+    });
+</script>
+
+        <script>
+            document.getElementById("logout-btn").addEventListener("click", function () {
+                fetch('Consultas/cerrar_sesion.php')
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            window.location.href = "index.html";
+                        }
+                    })
+                    .catch(error => console.error('Error al cerrar sesión:', error));
+            });
+        </script>
+<script>
+    window.history.pushState(null, "", window.location.href);
+    window.onpopstate = function () {
+        window.history.pushState(null, "", window.location.href);
+    };
+</script>
+
+</body>
+
+</html>
+

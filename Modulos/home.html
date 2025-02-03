@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Biblioteca</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../css/home.css">
+    <link rel="icon" type="image/png" href="img/icon.ico"/>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <button class="logout-btn" onclick="cerrarSesion()">
+        <i class="fas fa-power-off"></i>
+    </button>
+
+    <nav class="sidebar">
+        <div class="profile">
+            <img id="user-image" src="default-image.jpg" alt="Usuario" style="width: 150px; height: 150px; object-fit: cover;">
+            <h4 id="user-name">Cargando...</h4>
+            <p id="user-role">Cargando...</p>
+        </div>
+        <ul class="nav flex-column">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownLibros" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-book"></i> Agregar Libros
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownLibros">
+                    <li><a class="dropdown-item" href="AgregarLibros.html">Agregar Nuevo Libro</a></li>
+                    <li><a class="dropdown-item" href="EditarLibros.html">Editar Libros</a></li>
+                </ul>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="prestamos.html"> <i class="fas fa-book-reader"></i> Préstamos</a></li>
+            <li class="nav-item"><a class="nav-link" href="AgregarPrestamo.html"> <i class="fas fa-bookmark"></i> Agregar Préstamo</a></li>
+            <li class="nav-item"><a class="nav-link" href="#"> <i class="fas fa-undo"></i> Devoluciones</a></li>
+            <li class="nav-item"><a class="nav-link" href="Categorias.html"> <i class="fas fa-list"></i> Categorías</a></li>
+            <li class="nav-item"><a class="nav-link" href="#"> <i class="fas fa-users"></i> Estudiantes</a></li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user-shield"></i> Administradores
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="CrearUsuarios.html">Crear Usuario</a></li>
+                    <li><a class="dropdown-item" href="Administradores.html">Administradores</a></li>
+                </ul>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="Configuracion.html"> <i class="fas fa-cog"></i> Configuracion</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-content">
+        <h2 class="mt-4">Panel de Administración</h2>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card text-white bg-info mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Usuarios</h5>
+                        <p id="usuarios" class="card-text">Cargando...</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-white bg-primary mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Libros</h5>
+                        <p id="libros" class="card-text">Cargando...</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-white bg-warning mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Autores</h5>
+                        <p id="autores" class="card-text">Cargando...</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-white bg-danger mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Editoriales</h5>
+                        <p id="editoriales" class="card-text">Cargando...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="chart-container">
+            <canvas id="miGrafica"></canvas>
+        </div>
+    </div>
+    
+    <!-- Include all required JS scripts -->
+    <script>
+        fetch('../Consultas/consultar_estadisticas.php')
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    console.error(data.error);
+                } else {
+                    document.getElementById('usuarios').innerText = data.total_usuarios;
+                    document.getElementById('libros').innerText = data.total_libros;
+                    document.getElementById('autores').innerText = data.total_autores;
+                    document.getElementById('editoriales').innerText = data.total_editoriales;
+                }
+            })
+            .catch(error => console.error('Error al obtener las estadísticas:', error));
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('../Consultas/datos_usuario.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        console.error(data.error);
+                        return;
+                    }
+        
+                    document.getElementById('user-name').innerText = data.usuario;
+                    document.getElementById('user-role').innerText = data.rol;
+        
+                    const userImage = document.getElementById('user-image');
+                    userImage.src = data.imagen ? data.imagen : 'default-image.jpg';
+                })
+                .catch(error => {
+                    console.error('Error al cargar los datos del usuario:', error);
+                });
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch('../Consultas/auth.php', { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.authenticated) {
+                        window.location.href = "/SystemBiblio/index.html";
+                    }
+                })
+                .catch(error => console.error('Error verificando la sesión:', error));
+        });
+    </script>
+    
+<script>
+    function cerrarSesion() {
+        fetch('../Consultas/cerrar_sesion.php')
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = "/SystemBiblio/index.html";
+                }
+            })
+            .catch(error => console.error('Error al cerrar sesión:', error));
+    }
+</script>
+
+<script>
+    window.history.pushState(null, "", window.location.href);
+    window.onpopstate = function () {
+        window.history.pushState(null, "", window.location.href);
+    };
+</script>
+
+<script>
+    fetch('../Consultas/consultar_estadisticas.php')
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                console.error("Error en la consulta:", data.error);
+                return;
+            }
+    
+            let totalUsuarios = data.total_usuarios;
+            let totalLibros = data.total_libros;
+            let totalAutores = data.total_autores;
+            let totalEditoriales = data.total_editoriales;
+    
+            let ctx = document.getElementById('miGrafica').getContext('2d');
+            let miGrafica = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Usuarios', 'Libros', 'Autores', 'Editoriales'],
+                    datasets: [{
+                        label: 'Estadísticas',
+                        data: [totalUsuarios, totalLibros, totalAutores, totalEditoriales],
+                        backgroundColor: [
+                            'rgba(54, 162, 235, 0.5)', 
+                            'rgba(255, 99, 132, 0.5)', 
+                            'rgba(75, 192, 192, 0.5)', 
+                            'rgba(153, 102, 255, 0.5)' 
+                        ],
+                        borderColor: [
+                            'rgba(54, 162, 235, 1)', 
+                            'rgba(255, 99, 132, 1)', 
+                            'rgba(75, 192, 192, 1)', 
+                            'rgba(153, 102, 255, 1)' 
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false, 
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    onClick: (e) => {
+                        const activePoints = miGrafica.getElementsAtEventForMode(e, 'nearest', { intersect: true }, false);
+                        if (activePoints.length > 0) {
+                            const datasetIndex = activePoints[0].datasetIndex;
+                            const index = activePoints[0].index;
+                            const label = miGrafica.data.labels[index];
+                            const value = miGrafica.data.datasets[datasetIndex].data[index];
+                            alert(`Estadística seleccionada: ${label}\nValor: ${value}`);
+                        }
+                    }
+                }
+            });
+        })
+        .catch(error => console.error("Error en la petición:", error));
+</script>
+</body>
+
+</html>
+
+
+
+
+
