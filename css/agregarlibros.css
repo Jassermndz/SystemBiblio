@@ -1,0 +1,85 @@
+body {
+    display: flex;
+    background-color: #f4f6f9;
+    font-family: 'Arial', sans-serif;
+}
+
+.sidebar {
+    height: 100vh;
+    position: fixed;
+    width: 250px;
+    background-color: #343a40;
+    padding-top: 20px;
+}
+
+.sidebar .profile {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.sidebar .profile img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.sidebar .profile h4 {
+    color: white;
+    margin-bottom: 0;
+}
+
+.sidebar .profile p {
+    color: #ccc;
+    font-size: 14px;
+}
+
+.sidebar .nav-link {
+    color: white;
+    padding: 15px;
+    font-size: 16px;
+}
+
+.sidebar .nav-link:hover {
+    background-color: #495057;
+}
+
+.main-content {
+    margin-left: 250px;
+    padding: 30px;
+    width: calc(100% - 250px);
+}
+
+.card-custom {
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form-label {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.form-control,
+.btn {
+    border-radius: 8px;
+}
+
+.btn-custom {
+    background-color: #007bff;
+    color: white;
+    border: none;
+}
+
+.btn-custom:hover {
+    background-color: #0056b3;
+}
+
+.mb-4 {
+    margin-bottom: 1.5rem;
+}
+
+.container-form {
+    max-width: 800px;
+    margin: 0 auto;
+}
