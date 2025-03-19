@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Preguntas Frecuentes - JCV</title>
+    <link href="img/logonew.png" rel="icon">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- Agregar Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        .bg-primary {
+            background-color: #000000 !important;
+        }
+
+        .faq-section {
+            padding: 50px 0;
+            background-color: #ffffff;
+        }
+
+        .faq-title {
+            font-size: 2rem;
+            color: #000000;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .card-header {
+            background-color: #b4b4b4;
+            font-weight: bold;
+        }
+
+        .card-body {
+            background-color: #f1f1f1;
+        }
+
+        .accordion-button {
+            text-decoration: none;
+            color: #002efd;
+        }
+
+        .accordion-button:focus {
+            box-shadow: none;
+        }
+        
+        /* Cambiar el color de la navbar a azul */
+        .navbar {
+            background-color: #001986;
+            border-radius: 0; /* Hace que los bordes sean rectos */
+            padding: 10px 0; /* Ajuste del alto de la barra */
+        }
+
+        .navbar .navbar-brand, .navbar .navbar-nav .nav-link {
+            color: #ffffff !important;
+        }
+
+        .navbar .navbar-nav .nav-link:hover {
+            color: #FFD700 !important;
+        }
+
+        /* Asegurarse que el navbar tenga bordes rectos */
+        .navbar-toggler-icon {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Navbar (opcional) -->
+<nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="#">
+        <img src="img/logo.png" alt="Logo JCV" style="height: 70px;"> 
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">Inicio</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="contact.html">Contáctanos</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Sección de FAQs -->
+<div class="faq-section">
+    <div class="container">
+        <h1 class="faq-title">Preguntas Frecuentes (FAQs)</h1>
+        <div class="accordion" id="faqAccordion">
+
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                        <button class="accordion-button" type="button" data-toggle="collapse" data-target="#collapseZero" aria-expanded="true" aria-controls="collapseOne">
+                            ¿Cómo puedo iniciar sesión siendo empleado?
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseZero" class="collapse show" aria-labelledby="headingZero" data-parent="#faqAccordion">
+                    <div class="card-body">
+                        Para iniciar sesión, haz clic en el enlace "Empleados" ubicado en la parte superior derecha del inicio. Luego, ingresa tus credenciales para acceder a tu cuenta.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                        <button class="accordion-button" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            ¿Cómo puedo iniciar sesión siendo usuario?
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#faqAccordion">
+                    <div class="card-body">
+                        Para iniciar sesión, haz clic en el enlace "Login" ubicado en la parte superior derecha de libros. Luego, ingresa tus credenciales para acceder a tu cuenta.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header" id="headingTwo">
+                    <h5 class="mb-0">
+                        <button class="accordion-button" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            ¿Cómo puedo utilizar la pagina?
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#faqAccordion">
+                    <div class="card-body">
+                        Para utilizar la pagina te adjuntaramos un manual de uso, en el cual te explicaremos paso a paso como utilizar la pagina o un video tutorial.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header" id="headingThree">
+                    <h5 class="mb-0">
+                        <button class="accordion-button" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            ¿Qué hago si olvido mi contraseña?
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#faqAccordion">
+                    <div class="card-body">
+                        Si olvidas tu contraseña, puedes hacer clic en "¿Olvidaste tu contraseña?" en la página de inicio de sesión. Luego recibirás un correo para restablecerla.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header" id="headingFour">
+                    <h5 class="mb-0">
+                        <button class="accordion-button" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            ¿Cómo puedo contactar con soporte?
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#faqAccordion">
+                    <div class="card-body">
+                        Puedes contactar con soporte a través de la sección "Contáctanos" en nuestro sitio web o enviándonos un correo a pearlpirates504@gmail.com.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Footer (opcional) -->
+    <div class="container-fluid footer bg-light py-5" style="margin-top: 90px;">
+        <div class="container text-center py-5">
+            <div class="row">
+                <div class="col-12 mb-4">
+                    <a href="index.html" class="navbar-brand m-0">
+                        <h1 class="m-0 mt-n2 display-4 text-primary"><span class="text-secondary">I</span>JCV</h1>
+                    </a>
+                </div>
+                <div class="col-12 mb-4">
+                    <a class="btn btn-outline-secondary btn-social mr-2" href="#"><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-outline-secondary btn-social mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-outline-secondary btn-social mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a class="btn btn-outline-secondary btn-social" href="https://www.instagram.com/pearlpirates_504?igsh=MTd5N3JnNnVpaGZ6NQ%3D%3D&utm_source=qr"><i class="fab fa-instagram"></i></a>
+                </div>
+                <div class="col-12 mt-2 mb-4">
+                    <div class="row">
+                        <div class="col-sm-6 text-center text-sm-right border-right mb-3 mb-sm-0">
+                            <h5 class="font-weight-bold mb-2">Toca aqui</h5>
+                            <p class="mb-2">Barrio Nueva Esperanza</p>
+                            <p class="mb-0">+012 345 67890</p>
+                        </div>
+                        <div class="col-sm-6 text-center text-sm-left">
+                            <h5 class="font-weight-bold mb-2">Abierto</h5>
+                            <p class="mb-2">Lun – Sab, 7AM – 5PM</p>
+                            <p class="mb-0">Domingo: Cerrado</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <p class="m-0">&copy; <a href="#">Dominio</a>. Derechos reservados <a href="mailto:pearlpirates504@gmail.com">The BlacK Pearl (S.A)</a></p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<!-- Scripts necesarios para Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

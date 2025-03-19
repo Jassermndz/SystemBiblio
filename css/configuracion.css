@@ -1,0 +1,111 @@
+body {
+    display: flex;
+    height: 100vh;
+    margin: 0;
+}
+
+.sidebar {
+    width: 250px;
+    height: 100%;
+    background-color: #023577;
+    padding-top: 20px;
+    position: fixed;
+}
+
+
+.sidebar .profile {
+    text-align: center;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.sidebar .profile img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.sidebar .profile h4,
+.sidebar .profile p {
+    margin: 0;
+}
+
+.sidebar a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: block;
+    margin: 5px 0;
+    border-radius: 5px;
+}
+
+.sidebar a:hover {
+    background-color: #495057;
+}
+
+.sidebar .dropdown-menu {
+    background-color: #343a40;
+    border: none;
+}
+
+.main-content {
+    margin-left: 250px;
+    padding: 20px;
+    flex: 1;
+}
+
+
+/* Estilos para el modo oscuro */
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+body.dark-mode .sidebar {
+    background: linear-gradient(to bottom, #0d253f, #000000); /* Color más oscuro para la sidebar */
+}
+
+body.dark-mode .sidebar .nav-link {
+    color: #ffffff;
+}
+
+body.dark-mode .sidebar .nav-link:hover {
+    background-color: #495057;
+}
+
+body.dark-mode .main-content {
+    background-color: #1e1e1e;
+}
+
+body.dark-mode .main-content h2, .main-content .form-label {
+    color: #ffffff;
+}
+
+body.dark-mode .table {
+    background-color: #333333;
+    color: #ffffff;
+}
+
+body.dark-mode .table th, .table td {
+    border-color: #444;
+}
+
+/* Estilo del botón para cambiar el tema */
+.toggle-theme-btn {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.toggle-theme-btn:hover {
+    background-color: #555;
+}

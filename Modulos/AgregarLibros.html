@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Libro - Biblioteca</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../css/agregarlibros.css">
+    <link rel="icon" type="image/png" href="../BiblioVirtual/img/logo.png"/>
+    <style>
+        body .sidebar {
+    background: linear-gradient(to bottom, #023577, #000000);
+}
+body.dark-mode {
+    background-color: #121212; 
+    color: white; 
+}
+
+body.dark-mode .sidebar {
+    background-color: #333; 
+}
+
+body.dark-mode .card {
+    background-color: #444; 
+    color: white;
+}
+
+
+
+    </style>
+</head>
+
+<body>
+    <nav class="sidebar">
+        <div class="profile">
+            <img id="user-image" src="default-image.jpg" alt="Usuario"
+                style="width: 150px; height: 150px; object-fit: cover;">
+            <h4 id="user-name">Cargando...</h4>
+            <p id="user-role">Cargando...</p>
+        </div>
+        <ul class="nav flex-column">
+            <li class="nav-item dropdown">
+            <li class="nav-item"><a class="nav-link" href="home.html"> <i class="fas fa-home"></i> Inicio</a></li>
+            <li class="nav-item"><a class="nav-link" href="EditarLibros.html"> <i class="fas fa-book"></i> Editar Libros</a></li>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="prestamos.html"> <i class="fas fa-book-reader"></i>
+                    Préstamos</a></li>
+            <li class="nav-item"><a class="nav-link" href="AgregarPrestamo.html"> <i class="fas fa-bookmark"></i>
+                    Agregar Préstamo</a></li>
+            <li class="nav-item"><a class="nav-link" href="#"> <i class="fas fa-undo"></i> Devoluciones</a></li>
+            <li class="nav-item"><a class="nav-link" href="Categorias.html"> <i class="fas fa-list"></i> Categorías</a>
+                <li class="nav-item"><a class="nav-link" href="Estudiantes.html"> <i class="fas fa-user-graduate"></i> Estudiantes</a></li>
+
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    <i class="fas fa-user-shield"></i> Administradores
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="Administradores.html">Administradores</a></li>
+                </ul>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="Configuracion.html"> <i class="fas fa-cog"></i>
+                    Configuracion</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-content">
+        <div class="container-form">
+            <h2 class="mb-4">Agregar Nuevo Libro</h2>
+            <div class="card card-custom mb-4">
+                <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data" action="../Consultas/agregar_libro.php">
+                        <div class="mb-4">
+                            <label for="titulo" class="form-label">Título</label>
+                            <input type="text" class="form-control" id="titulo" name="titulo" required
+                                placeholder="Ingrese el título del libro">
+                        </div>
+                        <div class="mb-4">
+                            <label for="autor" class="form-label">Autor</label>
+                            <input type="text" class="form-control" id="autor" name="autor" required
+                                placeholder="Ingrese el autor del libro">
+                        </div>
+                        <div class="mb-4">
+                            <label for="editorial" class="form-label">Editorial</label>
+                            <input type="text" class="form-control" id="editorial" name="editorial"
+                                placeholder="Ingrese la editorial del libro">
+                        </div>
+                        <div class="mb-4">
+                            <label for="anio_publicacion" class="form-label">Año de Publicación</label>
+                            <input type="date" class="form-control" id="anio_publicacion" name="anio_publicacion"
+                                placeholder="Seleccione el año de publicación" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="isbn" class="form-label">ISBN</label>
+                            <input type="text" class="form-control" id="isbn" name="isbn" required
+                                placeholder="Ingrese el ISBN del libro">
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="categoria" class="form-label">Categoría</label>
+                            <select class="form-control" id="categoria" name="categoria">
+                                <option value="">Seleccione una categoría</option>
+                            </select>
+                            <input type="hidden" id="categoria_nombre" name="categoria_nombre">
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="imagen" class="form-label">Imagen del Libro</label>
+                            <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="pdf" class="form-label">Archivo PDF del Libro</label>
+                            <input type="file" class="form-control" id="pdf" name="pdf" accept="application/pdf" required>
+                        </div>
+                        
+
+                        <div class="mb-4">
+                            <label for="cantidad_disponible" class="form-label">Cantidad Disponible</label>
+                            <input type="number" class="form-control" id="cantidad_disponible"
+                                name="cantidad_disponible" value="0">
+                        </div>
+                        <div class="mb-4">
+                            <label for="estanteria" class="form-label">Estantería</label>
+                            <input type="text" class="form-control" id="estanteria" name="estanteria"
+                                placeholder="Ingrese la ubicación de la estantería">
+                        </div>
+                        <button type="submit" class="btn btn-custom">Agregar Libro</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div id="success-message" class="alert alert-success position-fixed top-0 end-0 m-3 p-3 shadow-lg" 
+style="display: none; z-index: 1050; border-radius: 10px;">
+<i class="fas fa-check-circle"></i> ¡Libro agregado correctamente!  
+<span id="arrow" style="display: inline-block; margin-left: 5px;">➡️</span>
+</div>
+
+<div id="error-message" class="alert alert-danger position-fixed top-0 end-0 m-3 p-3 shadow-lg" 
+style="display: none; z-index: 1050; border-radius: 10px;">
+<i class="fas fa-exclamation-circle"></i> <span id="error-text"></span>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+   const form = document.querySelector("form");
+
+   form.addEventListener("submit", function (event) {
+       event.preventDefault(); 
+
+       const formData = new FormData(form);
+
+       fetch(form.action, {
+           method: "POST",
+           body: formData
+       })
+       .then(response => response.json())
+       .then(data => {
+           if (data.success) {
+               mostrarMensajeExito();
+               form.reset(); 
+           } else {
+               mostrarMensajeError(data.error);
+           }
+       })
+       .catch(() => mostrarMensajeError("Error de conexión con el servidor."));
+   });
+
+   function mostrarMensajeExito() {
+       const message = document.getElementById("success-message");
+       const arrow = document.getElementById("arrow");
+
+       message.style.display = "block";
+       arrow.style.animation = "arrowMove 0.5s infinite alternate ease-in-out";
+
+       setTimeout(() => {
+           message.style.display = "none";
+       }, 4000);
+   }
+
+   function mostrarMensajeError(errorText) {
+       const message = document.getElementById("error-message");
+       document.getElementById("error-text").innerText = errorText;
+       message.style.display = "block";
+
+       setTimeout(() => {
+           message.style.display = "none";
+       }, 4000);
+   }
+});
+</script>
+
+<style>
+@keyframes arrowMove {
+   0% { transform: translateX(0); }
+   100% { transform: translateX(10px); }
+}
+</style>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/cargarCategorias.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('../Consultas/datos_usuario.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        console.error(data.error);
+                        return;
+                    }
+
+                    document.getElementById('user-name').innerText = data.usuario;
+                    document.getElementById('user-role').innerText = data.rol;
+
+                    const userImage = document.getElementById('user-image');
+                    userImage.src = data.imagen ? data.imagen : '../img/imgperfil.png';
+                })
+                .catch(error => {
+                    console.error('Error al cargar los datos del usuario:', error);
+                });
+        });
+    </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch('../Consultas/auth.php', { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.authenticated) {
+                        window.location.href = "/SystemBiblio/BiblioVirtual/libros.html";
+                    }
+                })
+                .catch(error => console.error('Error verificando la sesión:', error));
+        });
+    </script>
+    
+<script>
+    function cerrarSesion() {
+        fetch('../Consultas/cerrar_sesion.php')
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = "/SystemBiblio/BiblioVirtual/libros.html";
+                }
+            })
+            .catch(error => console.error('Error al cerrar sesión:', error));
+    }
+</script>
+
+
+    <script>
+        window.history.pushState(null, "", window.location.href);
+        window.onpopstate = function () {
+            window.history.pushState(null, "", window.location.href);
+        };
+    </script>
+
+    
+    <script>
+document.addEventListener('DOMContentLoaded', function () {
+    if (localStorage.getItem('dark-mode') === 'enabled') {
+        document.body.classList.add('dark-mode');
+    }
+});
+
+    </script>
+</body>
+
+</html>

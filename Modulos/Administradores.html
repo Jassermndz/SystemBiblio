@@ -1,0 +1,210 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Administrador</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../css/administradores.css">
+    <link rel="icon" type="image/png" href="../BiblioVirtual/img/logo.png"/>
+
+
+    <style>
+        body .sidebar {
+    background: linear-gradient(to bottom, #023577, #000000);
+}
+body.dark-mode {
+    background-color: #121212; 
+    color: white; 
+}
+
+body.dark-mode .sidebar {
+    background-color: #333; 
+}
+
+body.dark-mode .card {
+    background-color: #444; 
+    color: white;
+}
+
+
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #28a745;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    display: none;
+    font-size: 16px;
+    z-index: 1000;
+}
+
+.notification.error {
+    background-color: #dc3545;
+}
+
+    </style>
+
+
+
+</head>
+
+<body>
+    <nav class="sidebar">
+        <div class="profile">
+            <img id="user-image" src="default-image.jpg" alt="Usuario" style="width: 150px; height: 150px; object-fit: cover;">
+            <h4 id="user-name">Cargando...</h4>
+            <p id="user-role">Cargando...</p>
+        </div>
+        <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link" href="home.html"> <i class="fas fa-home"></i> Inicio</a></li>
+            <li class="nav-item"><a class="nav-link" href="AgregarLibros.html"> <i class="fas fa-book"></i> Agregar Libros</a></li>
+            <li class="nav-item"><a class="nav-link" href="prestamos.html"> <i class="fas fa-book-reader"></i> Préstamos</a></li>
+            <li class="nav-item"><a class="nav-link" href="#"> <i class="fas fa-undo"></i> Devoluciones</a></li>
+            <li class="nav-item"><a class="nav-link" href="Categorias.html"> <i class="fas fa-list"></i> Categorías</a></li>
+            <li class="nav-item"><a class="nav-link" href="Estudiantes.html"> <i class="fas fa-user-graduate"></i> Estudiantes</a></li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user-shield"></i> Administradores
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                </ul>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="Configuracion.html"> <i class="fas fa-cog"></i> Configuración</a></li>
+
+        </ul>
+    </nav>
+
+    <div class="main-content">
+        <h2 class="mt-4">Crear Administrador</h2>
+        <div class="form-container">
+            <form action="../Consultas/insertar_administrador.php" method="POST" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="usuario" class="form-label">Usuario</label>
+                    <input type="text" class="form-control" id="usuario" name="usuario" required>
+                </div>
+                <div class="mb-3">
+                    <label for="contrasena" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" id="contrasena" name="contrasena" required>
+                </div>
+                <div class="mb-3">
+                    <label for="rol" class="form-label">Rol</label>
+                    <select class="form-select" id="rol" name="rol" required>
+                        <option value="Administrador">Administrador</option>
+                        <option value="Empleado">Empleado</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="imagen" class="form-label">Imagen de Perfil</label>
+                    <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*">
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-success">Crear Administrador</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <div id="notification" class="notification"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const notification = document.getElementById('notification');
+    
+            if (urlParams.has('success')) {
+                showNotification(urlParams.get('success'), 'success');
+            } else if (urlParams.has('error')) {
+                showNotification(urlParams.get('error'), 'error');
+            }
+    
+            function showNotification(message, type) {
+                notification.textContent = decodeURIComponent(message);
+                notification.classList.add(type === 'error' ? 'error' : 'success');
+                notification.style.display = 'block';
+    
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                    history.replaceState(null, "", window.location.pathname); 
+                }, 3000);
+            }
+        });
+    </script>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('../Consultas/datos_usuario.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        console.error(data.error);
+                        return;
+                    }
+        
+                    document.getElementById('user-name').innerText = data.usuario;
+                    document.getElementById('user-role').innerText = data.rol;
+        
+                    const userImage = document.getElementById('user-image');
+                    userImage.src = data.imagen ? data.imagen : '../img/imgperfil.png';
+                })
+                .catch(error => {
+                    console.error('Error al cargar los datos del usuario:', error);
+                });
+        });
+            </script>
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch('../Consultas/auth.php', { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.authenticated) {
+                        window.location.href = "/SystemBiblio/BiblioVirtual/libros.html";
+                    }
+                })
+                .catch(error => console.error('Error verificando la sesión:', error));
+        });
+    </script>
+    
+<script>
+    function cerrarSesion() {
+        fetch('../Consultas/cerrar_sesion.php')
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = "/SystemBiblio/BiblioVirtual/libros.html";
+                }
+            })
+            .catch(error => console.error('Error al cerrar sesión:', error));
+    }
+</script>
+
+<script>
+    window.history.pushState(null, "", window.location.href);
+    window.onpopstate = function () {
+        window.history.pushState(null, "", window.location.href);
+    };
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    if (localStorage.getItem('dark-mode') === 'enabled') {
+        document.body.classList.add('dark-mode');
+    }
+});
+
+</script>
+
+
+</body>
+
+</html>
+

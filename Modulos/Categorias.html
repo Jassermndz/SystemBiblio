@@ -1,0 +1,178 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Biblioteca</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../css/categorias.css">
+    <link rel="icon" type="image/png" href="../BiblioVirtual/img/logo.png"/>
+
+    <style>
+        body .sidebar {
+    background: linear-gradient(to bottom, #023577, #000000);
+}
+body.dark-mode {
+    background-color: #121212; 
+    color: white; 
+}
+
+body.dark-mode .sidebar {
+    background-color: #333; 
+}
+
+body.dark-mode .card {
+    background-color: #444; 
+    color: white;
+}
+
+
+
+    </style>
+
+</head>
+<body>
+
+    <nav class="sidebar">
+        <div class="profile">
+            <img id="user-image" src="default-image.jpg" alt="Usuario" style="width: 150px; height: 150px; object-fit: cover;">
+            <h4 id="user-name">Cargando...</h4>
+            <p id="user-role">Cargando...</p>
+        </div>
+        <ul class="nav flex-column">
+            <li class="nav-item dropdown">
+
+                <li class="nav-item"><a class="nav-link" href="home.html"> <i class="fas fa-home"></i> Inicio</a></li>
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownLibros" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-book"></i> Agregar Libros
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownLibros">
+                    <li><a class="dropdown-item" href="AgregarLibros.html">Agregar Nuevo Libro</a></li>
+                    <li><a class="dropdown-item" href="EditarLibros.html">Editar Libros</a></li>
+                </ul>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="prestamos.html"> <i class="fas fa-book-reader"></i> Préstamos</a></li>
+            <li class="nav-item"><a class="nav-link" href="AgregarPrestamo.html"> <i class="fas fa-bookmark"></i> Agregar Préstamo</a></li>
+            <li class="nav-item"><a class="nav-link" href="Devoluciones.html"> <i class="fas fa-undo"></i> Devoluciones</a></li>
+            <li class="nav-item"><a class="nav-link" href="Categorias.html"> <i class="fas fa-list"></i> Categorías</a></li>
+            <li class="nav-item"><a class="nav-link" href="CrearCategorias.html"> <i class="fa-solid fa-desktop">‌</i> Crear Categorías</a></li>
+            <li class="nav-item"><a class="nav-link" href="Profesores.html"> <i class="fas fa-chalkboard-teacher"></i> Profesores</a></li>
+            <li class="nav-item"><a class="nav-link" href="Estudiantes.html"> <i class="fas fa-user-graduate"></i> Estudiantes</a></li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user-shield"></i> Administradores
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownLibros">
+                    <li><a class="dropdown-item" href="Administradores.html">Administradores</a></li>
+                </ul>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="Configuracion.html"> <i class="fas fa-cog"></i> Configuracion</a></li>
+        </ul>
+    </nav>
+  
+    <div class="main-content">
+        <h2 class="mt-4">Categorías</h2>
+
+        <div class="table-container">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <th>ID Categoría</th>
+                    <th>Nombre</th>
+                </thead>
+                <tbody id="categoria-table-container">
+                    <tr>
+                        <td colspan="2">Cargando categorías...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        window.onload = function() {
+            fetch('../Consultas/categorias.php')
+
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('categoria-table-container').innerHTML = data;
+        })
+        .catch(error => {
+            document.getElementById('categoria-table-container').innerHTML = '<tr><td colspan="2">Error al cargar las categorías.</td></tr>';
+        });
+}
+
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('../Consultas/datos_usuario.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        console.error(data.error);
+                        return;
+                    }
+        
+                    document.getElementById('user-name').innerText = data.usuario;
+                    document.getElementById('user-role').innerText = data.rol;
+        
+                    const userImage = document.getElementById('user-image');
+                    userImage.src = data.imagen ? data.imagen : '../img/imgperfil.png';
+                })
+                .catch(error => {
+                    console.error('Error al cargar los datos del usuario:', error);
+                });
+        });
+            </script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        fetch('../Consultas/auth.php', { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+            .then(response => response.json())
+            .then(data => {
+                if (!data.authenticated) {
+                    window.location.href = "/SystemBiblio/BiblioVirtual/libros.html";
+                }
+            })
+            .catch(error => console.error('Error verificando la sesión:', error));
+    });
+</script>
+
+<script>
+function cerrarSesion() {
+    fetch('../Consultas/cerrar_sesion.php')
+        .then(response => {
+            if (response.ok) {
+                window.location.href = "/SystemBiblio/BiblioVirtual/libros.html";
+            }
+        })
+        .catch(error => console.error('Error al cerrar sesión:', error));
+}
+</script>
+<script>
+    window.history.pushState(null, "", window.location.href);
+    window.onpopstate = function () {
+        window.history.pushState(null, "", window.location.href);
+    };
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    if (localStorage.getItem('dark-mode') === 'enabled') {
+        document.body.classList.add('dark-mode');
+    }
+});
+
+</script>
+</body>
+
+</html>
+
+
+

@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>INICIO - JCV</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <link href="img/logonew.png" rel="icon">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<style>
+.bg-primary {
+    background-color: #002efd !important; 
+}
+.nav-item.nav-link:hover {
+        color: #001058 !important;  
+    }
+    .carousel-item img {
+    max-height: 1000px;
+    object-fit: cover;
+}
+.usuario {
+    position: absolute;
+    left: 1px;  
+    top: 50%;     
+    transform: translateY(-50%); 
+}
+
+.col-md-6 {
+    padding-left: 20px; 
+}
+
+.text-white {
+    white-space: nowrap;
+}
+.section-title::before {
+  position: absolute;
+  content: "";
+  top: -10px;
+  left: 0;
+  width: 100px;
+  height: 5px;
+  background: #0e009b;
+}
+
+.section-title::after {
+  position: absolute;
+  content: "";
+  top: -8px;
+  left: 0;
+  width: 100px;
+  height: 1px;
+  background: #0e009b;
+}
+.col-12 a {
+    color: rgb(2, 0, 150); 
+    text-decoration: none;
+}
+
+.col-12 a:hover, .col-12 a:focus, .col-12 a:active {
+    color: #0e009b; 
+}
+.owl-carousel .owl-nav {
+  position: absolute;
+  width: 135px;
+  height: 60px;
+  top: -110px;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1;
+}
+
+.owl-carousel .owl-nav .owl-prev,
+.owl-carousel .owl-nav .owl-next {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0e009b;
+  background: #FFFFFF;
+  border-radius: 60px;
+  font-size: 30px;
+}
+</style>
+<body>
+    <div class="container-fluid bg-primary py-3">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-4 text-center text-lg-left mb-2 mb-lg-0">
+                    <p class="usuario text-white" id="usuarioNombre" style="display: none;"></p>
+                </div>
+                <div class="col-md-4 d-flex justify-content-center mb-2 mb-lg-0">
+                    <div class="d-inline-flex align-items-center d-md-none flex-wrap justify-content-center">
+                        <a class="text-white pr-3" href="FAQS.html">FAQs</a>
+                        <span class="text-white">|</span>
+                        <a class="text-white px-3" href="">Ayuda</a>
+                        <span class="text-white">|</span>
+                        <a class="text-white px-3" href="">Soporte</a>
+                        <span class="text-white">|</span>
+                        <a class="text-white px-3" href="CrearCuenta.html">Crear Cuenta</a>
+                        <span class="text-white">|</span>
+  
+                    </div>
+                    
+                    <div class="d-none d-md-inline-flex align-items-center">
+                        <a class="text-white pr-3" href="FAQS.html">FAQs</a>
+                        <span class="text-white">|</span>
+                        <a class="text-white px-3" href="">Ayuda</a>
+                        <span class="text-white">|</span>
+                        <a class="text-white px-3" href="">Soporte</a>
+                        <span class="text-white">|</span>
+                        <a class="text-white px-3" href="CrearCuenta.html">Crear Cuenta</a>
+                        <span class="text-white">|</span>
+                        <a class="text-white px-3" href="/SystemBiblio/login.html">Empleados</a>
+                    </div>
+                </div>
+                
+      
+                <div class="col-md-4 text-center text-lg-right">
+                    <div class="d-inline-flex align-items-center justify-content-center">
+                        <a class="text-white px-3" href="">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a class="text-white px-3" href="">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a class="text-white px-3" href="">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a class="text-white px-3" href="">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a class="text-white pl-3" href="">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="" style="background-color: #002efd;">
+        <div class="container-lg position-relative p-0 px-lg-3" style="z-index: 9;">
+            <nav class="navbar navbar-expand-lg navbar-light shadow p-lg-0" style="background-color: #FFD700;">
+                <a href="index.html" class="navbar-brand d-block d-lg-none">
+                    <h1 class="m-0 display-4 text-primary"><span class="text-secondary">I</span>JCV</h1>
+                </a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                    <div class="navbar-nav ml-auto py-0">
+                        <a href="index.html" class="nav-item nav-link">Inicio</a>
+                        <a href="about.html" class="nav-item nav-link">Acerca de</a>
+                        <a href="libros.html" class="nav-item nav-link">Libros</a>
+                    </div>
+       
+                    <a href="index.html" class="navbar-brand mx-5 d-none d-lg-block">
+                        <h1 class="m-0 display-4 text-primary"><span class="text-secondary">I</span>JCV</h1>
+                    </a>
+                    
+                    <div class="navbar-nav mr-auto py-0">
+                        <a href="service.html" class="nav-item nav-link">Carreras</a>
+                        <a href="gallery.html" class="nav-item nav-link">Galería</a>
+                        <a href="contact.html" class="nav-item nav-link">Contáctanos</a>
+                    </div>
+                    
+                </div>
+            </nav>
+        </div>
+    </div>
+    
+    <div class="container-fluid p-0 mb-5 pb-5">
+        <div id="header-carousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="w-100" src="img/JCV.png" alt="Image">
+                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                        <div class="p-3" style="max-width: 900px;">
+                            <h4 class="text-white text-uppercase mb-md-3">Instituto Departamental Jose Cecilio Del Valle</h4>
+                            <h1 class="display-3 text-white mb-md-4">Fundado en 1929</h1>
+                            <a href="IJCV.html" class="btn btn-primary py-md-3 px-md-5 mt-2">Leer mas</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img class="w-100" src="img/danzajcv.png" alt="Image">
+                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                        <div class="p-3" style="max-width: 900px;">
+                            <h4 class="text-white text-uppercase mb-md-3">Instituto Departamental Jose Cecilio Del Valle</h4>
+                            <h1 class="display-3 text-white mb-md-4">Grupo de Danza Folklorica</h1>
+                            <a href="IJCV.html" class="btn btn-primary py-md-3 px-md-5 mt-2">Leer mas</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img class="w-100" src="img/Banda.jpg" alt="Image" style="min-height: 60vh; object-fit: cover; object-position: center top;">
+                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                        <div class="p-3" style="max-width: 900px;">
+                            <h4 class="text-white text-uppercase mb-md-3">Instituto Departamental Jose Cecilio Del Valle</h4>
+                            <h1 class="display-3 text-white mb-md-4">Buhos Marching Band</h1>
+                            <a href="BandaJCV.html" class="btn btn-primary py-md-3 px-md-5 mt-2">Leer más</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
+                <div class="btn btn-secondary px-0" style="width: 45px; height: 45px;">
+                    <span class="carousel-control-prev-icon mb-n1"></span>
+                </div>
+            </a>
+            <a class="carousel-control-next" href="#header-carousel" data-slide="next">
+                <div class="btn btn-secondary px-0" style="width: 45px; height: 45px;">
+                    <span class="carousel-control-next-icon mb-n1"></span>
+                </div>
+            </a>
+        </div>
+    </div>
+
+
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-7">
+                    <h1 class="section-title position-relative text-center mb-5">El sabio Valle</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 py-5">
+                    <h4 class="font-weight-bold mb-3">Acerca de</h4>
+                    <h5 class="text-muted mb-3">Formando jovenes para una mejor Honduras</h5>
+                    <p>Siguiendo siempre una calidad de aprendizaje que nos ha caracterizado por años</p>
+                    <a href="about.html" class="btn btn-secondary mt-2">Leer mas</a>
+                </div>
+                <div class="col-lg-4" style="min-height: 400px;">
+                    <div class="position-relative h-100 rounded overflow-hidden">
+                        <img class="position-absolute w-100 h-100" src="img/Estatua.png" style="object-fit: cover;">
+                    </div>
+                </div>
+                <div class="col-lg-4 py-5">
+                    <h4 class="font-weight-bold mb-3">Valores</h4>
+                    <p>Formando con valores</p>
+                    <h5 class="text-muted mb-3"><i class="fa fa-check text-secondary mr-3"></i>Respeto</h5>
+                    <h5 class="text-muted mb-3"><i class="fa fa-check text-secondary mr-3"></i>Honestidad</h5>
+                    <h5 class="text-muted mb-3"><i class="fa fa-check text-secondary mr-3"></i>Solidaridad</h5>
+                    <a href="about.html" class="btn btn-primary mt-2">Leer mas</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid my-5 py-5 px-0">
+        <div class="row bg-primary m-0">
+            <div class="col-md-6 px-0" style="min-height: 500px;">
+                <div class="position-relative h-100">
+                    <img class="position-absolute w-100 h-100" src="img/logo.png" style="object-fit: contain;">
+
+                    <button type="button" class="btn-play" data-toggle="modal"
+                        data-href="https://youtu.be/DPtb5QTvH-w" data-target="#videoModal">
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-6 py-5 py-md-0 px-0">
+                <div class="h-100 d-flex flex-column align-items-center justify-content-center text-center p-5">
+                    <div class="d-flex align-items-center justify-content-center bg-white rounded-circle mb-4"
+                        style="width: 100px; height: 100px;">
+                        <h3 class="font-weight-bold text-secondary mb-0">JCV</h3>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>        
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item" src="" id="video" allowscriptaccess="always" allow="autoplay"></iframe>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container-fluid my-5 py-5 px-0">
+        <div class="row justify-content-center m-0">
+            <div class="col-lg-5">
+                <h1 class="section-title position-relative text-center mb-5">Portafolio</h1>
+            </div>
+        </div>
+        <div class="row m-0 portfolio-container">
+            <div class="col-lg-4 col-md-6 p-0 portfolio-item">
+                <div class="position-relative overflow-hidden">
+                    <img class="img-fluid w-100 portfolio-image" src="img/alumnos.jpg" alt="">
+                    <a class="portfolio-btn" href="img/alumnos.jpg" data-lightbox="portfolio">
+                        <i class="fa fa-plus text-primary" style="font-size: 60px;"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 p-0 portfolio-item">
+                <div class="position-relative overflow-hidden">
+                    <img class="img-fluid w-100 portfolio-image" src="img/alumnos.jpg" alt="">
+                    <a class="portfolio-btn" href="img/alumnos.jpg" data-lightbox="portfolio">
+                        <i class="fa fa-plus text-primary" style="font-size: 60px;"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 p-0 portfolio-item">
+                <div class="position-relative overflow-hidden">
+                    <img class="img-fluid w-100 portfolio-image" src="img/alumns3.jpg" alt="">
+                    <a class="portfolio-btn" href="img/alumns3.jpg" data-lightbox="portfolio">
+                        <i class="fa fa-plus text-primary" style="font-size: 60px;"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 p-0 portfolio-item">
+                <div class="position-relative overflow-hidden">
+                    <img class="img-fluid w-100 portfolio-image" src="img/alums.jpg" alt="">
+                    <a class="portfolio-btn" href="img/alums.jpg" data-lightbox="portfolio">
+                        <i class="fa fa-plus text-primary" style="font-size: 60px;"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 p-0 portfolio-item">
+                <div class="position-relative overflow-hidden">
+                    <img class="img-fluid w-100 portfolio-image" src="img/direc.jpg" alt="">
+                    <a class="portfolio-btn" href="img/direc.jpg" data-lightbox="portfolio">
+                        <i class="fa fa-plus text-primary" style="font-size: 60px;"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 p-0 portfolio-item">
+                <div class="position-relative overflow-hidden">
+                    <img class="img-fluid w-100 portfolio-image" src="img/danzajcv.png" alt="">
+                    <a class="portfolio-btn" href="img/danzajcv.png" data-lightbox="portfolio">
+                        <i class="fa fa-plus text-primary" style="font-size: 60px;"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="container-fluid py-5">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-6">
+                <h1 class="section-title position-relative mb-5">Libros</h1>
+            </div>
+            <div class="col-lg-6 mb-5 mb-lg-0 pb-5 pb-lg-0"></div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="owl-carousel product-carousel" id="librosCarousel">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    function cargarLibros() {
+        fetch('../Consultas/cargarlibros.php')  
+            .then(response => response.json())
+            .then(data => {
+                const librosCarousel = $('#librosCarousel');
+
+                if (!data.libros || data.libros.length === 0) {
+                    librosCarousel.html('<p class="text-center">No hay libros disponibles.</p>');
+                    return;
+                }
+
+                librosCarousel.trigger('destroy.owl.carousel').html('').removeClass('owl-loaded');
+
+                data.libros.slice(0, 4).forEach(libro => {
+                    const imagenSrc = libro.imagen ? `../${libro.imagen}` : 'default-image.jpg';
+
+                    console.log('Imagen cargada:', imagenSrc); 
+
+                    const libroItem = `
+                        <div class="product-item d-flex flex-column align-items-center text-center bg-light rounded py-5 px-3">
+                            <div class="bg-primary mt-n5 py-3" style="width: 80px;">
+                                <h4 class="font-weight-bold text-white mb-0">${libro.anio_publicacion}</h4>
+                            </div>
+                            <div class="position-relative bg-primary rounded-circle mt-n3 mb-4 p-3" style="width: 150px; height: 150px;">
+                                <img class="rounded-circle w-100 h-100" src="${imagenSrc}" style="object-fit: cover;" alt="${libro.titulo}">
+                            </div>
+                            <h5 class="font-weight-bold mb-4">${libro.titulo}</h5>
+                            <p class="font-weight-bold mb-4">${libro.autor}</p>
+                        </div>
+                    `;
+
+                    librosCarousel.append(libroItem);
+                });
+
+                librosCarousel.owlCarousel({
+                    loop: true,
+                    margin: 10,
+                    nav: true,
+                    dots: true,
+                    autoplay: true,
+                    autoplayTimeout: 3000,
+                    autoplayHoverPause: true,
+                    responsive: {
+                        0: { items: 1 },
+                        600: { items: 2 },
+                        1000: { items: 4 } 
+                    }
+                });
+            })
+            .catch(error => console.error('Error al cargar los libros:', error));
+    }
+
+    cargarLibros();
+});
+</script>
+
+
+    <div class="container-fluid footer bg-light py-5" style="margin-top: 90px;">
+        <div class="container text-center py-5">
+            <div class="row">
+                <div class="col-12 mb-4">
+                    <a href="index.html" class="navbar-brand m-0">
+                        <h1 class="m-0 mt-n2 display-4 text-primary"><span class="text-secondary">I</span>JCV</h1>
+                    </a>
+                </div>
+                <div class="col-12 mb-4">
+                    <a class="btn btn-outline-secondary btn-social mr-2" href="#"><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-outline-secondary btn-social mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-outline-secondary btn-social mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a class="btn btn-outline-secondary btn-social" href="https://www.instagram.com/pearlpirates_504?igsh=MTd5N3JnNnVpaGZ6NQ%3D%3D&utm_source=qr"><i class="fab fa-instagram"></i></a>
+                </div>
+                <div class="col-12 mt-2 mb-4">
+                    <div class="row">
+                        <div class="col-sm-6 text-center text-sm-right border-right mb-3 mb-sm-0">
+                            <h5 class="font-weight-bold mb-2">Toca aqui</h5>
+                            <p class="mb-2">Barrio Nueva Esperanza</p>
+                            <p class="mb-0">+012 345 67890</p>
+                        </div>
+                        <div class="col-sm-6 text-center text-sm-left">
+                            <h5 class="font-weight-bold mb-2">Abierto</h5>
+                            <p class="mb-2">Lun – Sab, 7AM – 5PM</p>
+                            <p class="mb-0">Domingo: Cerrado</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <p class="m-0">&copy; <a href="#">Dominio</a>. Derechos reservados <a href="mailto:pearlpirates504@gmail.com">The BlacK Pearl (S.A)</a></p>
+
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+    <a href="#" class="btn btn-secondary px-2 back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/isotope/isotope.pkgd.min.js"></script>
+    <script src="lib/lightbox/js/lightbox.min.js"></script>
+
+    <script src="mail/jqBootstrapValidation.min.js"></script>
+    <script src="mail/contact.js"></script>
+
+    <script src="js/main.js"></script>
+</body>
+
+
+<script>
+            $(document).ready(function () {
+            $.ajax({
+                url: '../Consultas/session.php',  
+                type: 'GET',
+                success: function (response) {
+                    if (response) {
+                        $('.usuario').text('Hola, ' + response);
+                        $('#cerrar-sesion').show(); 
+                    } else {
+                        $('#iniciar-sesion').show();  
+                    }
+                }
+            });
+        });
+</script>
+<script>
+
+    let usuarioLogueado = true;  
+    
+    if (usuarioLogueado) {
+        document.getElementById("usuarioNombre").style.display = "block"; 
+        document.getElementById("usuarioNombreResponsive").style.display = "block"; 
+        document.getElementById("usuarioNombre").textContent = "Nombre del Usuario"; 
+        
+        document.getElementById("iniciar-sesion").style.display = "none";  
+        document.getElementById("iniciar-sesion-mobile").style.display = "block";  
+        document.getElementById("cerrar-sesion").style.display = "block"; 
+        document.getElementById("cerrar-sesion-mobile").style.display = "block"; 
+    } else {
+    
+        document.getElementById("iniciar-sesion").style.display = "block";  
+        document.getElementById("iniciar-sesion-mobile").style.display = "block"; 
+        document.getElementById("cerrar-sesion").style.display = "block"; 
+        document.getElementById("cerrar-sesion-mobile").style.display = "block"; 
+    }
+    
+    </script>
+</html>

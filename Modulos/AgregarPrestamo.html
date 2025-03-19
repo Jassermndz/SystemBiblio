@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Libros Disponibles</title>
+    <link rel="icon" type="image/png" href="../img/icon.ico"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../css/agregarprestamos.css">
+    <link rel="icon" type="image/png" href="../BiblioVirtual/img/logo.png"/>
+
+    <style>
+        body .sidebar {
+    background: linear-gradient(to bottom, #023577, #000000);
+}
+body.dark-mode {
+    background-color: #121212; 
+    color: white; 
+}
+
+body.dark-mode .sidebar {
+    background-color: #333; 
+}
+
+body.dark-mode .card {
+    background-color: #444; 
+    color: white;
+}
+.libro-imagen {
+    transition: transform 0.2s ease-out;
+    transform-style: preserve-3d;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+    </style>
+</head>
+<body>
+    <nav class="sidebar">
+        <div class="profile">
+            <img id="user-image" src="default-image.jpg" alt="Usuario" style="width: 150px; height: 150px; object-fit: cover;">
+            <h4 id="user-name">Cargando...</h4>
+            <p id="user-role">Cargando...</p>
+        </div>
+        <ul class="nav flex-column">
+            <li class="nav-item dropdown">
+
+                <li class="nav-item"><a class="nav-link" href="home.html"> <i class="fas fa-home"></i> Inicio</a></li>
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownLibros" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-book"></i> Agregar Libros
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownLibros">
+                    <li><a class="dropdown-item" href="AgregarLibros.html">Agregar Nuevo Libro</a></li>
+                    <li><a class="dropdown-item" href="EditarLibros.html">Editar Libros</a></li>
+                </ul>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="prestamos.html"> <i class="fas fa-book-reader"></i> Préstamos</a></li>
+            <li class="nav-item"><a class="nav-link" href="#"> <i class="fas fa-undo"></i> Devoluciones</a></li>
+            <li class="nav-item"><a class="nav-link" href="Categorias.html"> <i class="fas fa-list"></i> Categorías</a></li>
+            <li class="nav-item"><a class="nav-link" href="Estudiantes.html"> <i class="fas fa-user-graduate"></i> Estudiantes</a></li>
+            <li class="nav-item"><a class="nav-link" href="Profesores.html"> <i class="fas fa-chalkboard-teacher"></i> Profesores</a></li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user-shield"></i> Administradores
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownLibros">
+                    <li><a class="dropdown-item" href="Administradores.html">Administradores</a></li>
+                </ul>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="Configuracion.html"> <i class="fas fa-cog"></i> Configuracion</a></li>
+        </ul>
+    </nav>
+
+    <div class="container mt-3">
+        <div class="d-flex justify-content-end align-items-center">
+            <label for="filtro-categoria" class="me-2">Categoría:</label>
+            <select class="form-select form-select-sm w-auto" id="categoria" name="categoria">
+                <option value="0">Todas</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="container mt-5">
+            <h2>Libros Disponibles</h2>
+            <div id="libros-container" class="row"></div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="prestamoModal" tabindex="-1" aria-labelledby="prestamoModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="prestamoModalLabel">Registrar Préstamo</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="prestamoForm" action="../Consultas/guardarprestamo.php" method="POST">
+                        <input type="hidden" id="libro-id" name="id_libro">
+                        <div class="mb-3">
+                            <label for="usuario-nombre" class="form-label">Buscar Usuario</label>
+                            <input type="text" class="form-control" id="usuario-nombre" placeholder="Buscar por nombre..." onkeyup="buscarUsuario()">
+                        </div>
+                        <div class="mb-3">
+                            <label for="usuario-seleccionado" class="form-label">(ID) Usuario Seleccionado</label>
+                            <input type="text" class="form-control" id="usuario-seleccionado" name="id_usuario" readonly required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="fecha_prestamo" class="form-label">Fecha de Préstamo</label>
+                            <input type="date" class="form-control" id="fecha_prestamo" name="fecha_prestamo" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="fecha_devolucion" class="form-label">Fecha de Devolución</label>
+                            <input type="date" class="form-control" id="fecha_devolucion" name="fecha_devolucion" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="estado" class="form-label">Estado del Préstamo</label>
+                            <select class="form-select" id="estado" name="estado" required>
+                                <option value="Prestado">Prestado</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="titulo-libro" class="form-label">Libro Seleccionado</label>
+                            <input type="text" class="form-control" id="titulo-libro" name="titulo_libro" readonly>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Registrar Préstamo</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    function aplicarEfecto3D() {
+    const images = document.querySelectorAll(".libro-imagen");
+
+    images.forEach(img => {
+        img.addEventListener("mousemove", (e) => {
+            let rect = img.getBoundingClientRect();
+            let x = e.clientX - rect.left;
+            let y = e.clientY - rect.top;
+
+            let centerX = rect.width / 2;
+            let centerY = rect.height / 2;
+
+            let rotateX = (y - centerY) / 10;
+            let rotateY = (centerX - x) / 10;
+
+            img.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+
+        img.addEventListener("mouseleave", () => {
+            img.style.transform = "rotateX(0) rotateY(0)";
+        });
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    cargarLibros();
+    aplicarEfecto3D();  
+
+    categoriaSelect.addEventListener('change', function () {
+        const categoriaId = parseInt(categoriaSelect.value);
+        cargarLibros(categoriaId === 0 ? null : categoriaId);
+        
+        setTimeout(aplicarEfecto3D, 500); 
+    });
+});
+</script>
+<script src="../js/auth.js"></script>
+<script src="../js/logout.js"></script>
+<script src="../js/dark-mode.js"></script>
+<script src="../js/prevent-back.js"></script>
+<script src="../js/user-data.js"></script>
+<script src="../js/cargar_libros.js"></script>
+<script src="../js/modal.js"></script>
+<script src="../js/search-user.js"></script>
+
+<script>
+function cerrarSesion() {
+    fetch('../Consultas/cerrar_sesion.php')
+        .then(response => {
+            if (response.ok) {
+                window.location.href = "/SystemBiblio/BiblioVirtual/libros.html";
+            }
+        })
+        .catch(error => console.error('Error al cerrar sesión:', error));
+}
+</script>
+</body>
+</html>
+
+
+
+
+
+

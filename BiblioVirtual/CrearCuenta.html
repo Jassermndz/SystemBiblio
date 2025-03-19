@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="img/logo.png" rel="icon">
+    <title>Registro de Usuario</title>
+    <style>
+        .notification {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 16px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            background: url('img/logo.png') no-repeat center center;
+            background-size: contain; /* Reduce la imagen y la mantiene en su tamaño original */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+        }
+
+        .form {
+            background: rgba(255, 255, 255, 0.8); /* Hace que el formulario sea semitransparente */
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-weight: bold;
+            font-size: 14px;
+            display: block;
+            margin-bottom: 5px;
+            color: black; /* Se cambia a negro para mejor visibilidad */
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: #4CAF50;
+        }
+
+        .button-submit {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .button-submit:hover {
+            background-color: #45a049;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="notification" id="successMessage">
+        Usuario registrado correctamente.
+    </div>
+
+    <form class="form" action="../Consultas/CrearUSERS.php" method="POST">
+        <h2>Registro de Usuario</h2>
+        <div class="input-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" required>
+        </div>
+        <div class="input-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        <div class="input-group">
+            <label for="telefono">Teléfono</label>
+            <input type="tel" id="telefono" name="telefono">
+        </div>
+        <div class="input-group">
+            <label for="direccion">Dirección</label>
+            <textarea id="direccion" name="direccion"></textarea>
+        </div>
+        <div class="input-group">
+            <label for="tipo">Tipo de Usuario</label>
+            <select id="tipo" name="tipo" required>
+                <option value="Estudiante">Estudiante</option>
+                <option value="Profesor">Profesor</option>
+                <option value="Publico">Público</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label for="password">Contraseña</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <button class="button-submit" type="submit">Registrar Usuario</button>
+    </form>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('success')) {
+            document.getElementById('successMessage').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
+
+

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Libro</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/editarlibros.css">
+    <link rel="icon" type="image/png" href="../BiblioVirtual/img/logo.png"/>
+
+    <style>
+        body .sidebar {
+    background: linear-gradient(to bottom, #023577, #000000);
+}
+body.dark-mode {
+    background-color: #121212; 
+    color: white; 
+}
+
+body.dark-mode .sidebar {
+    background-color: #333; 
+}
+
+body.dark-mode .card {
+    background-color: #444; 
+    color: white;
+}
+
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #28a745;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    display: none;
+    font-size: 16px;
+    z-index: 1000;
+}
+
+.notification.error {
+    background-color: #dc3545;
+}
+
+
+    </style>
+
+</head>
+
+<body>
+    <nav class="sidebar">
+        <div class="profile">
+            <img id="user-image" src="default-image.jpg" alt="Usuario" style="width: 150px; height: 150px; object-fit: cover;">
+            <h4 id="user-name">Cargando...</h4>
+            <p id="user-role">Cargando...</p>
+        </div>
+        <ul class="nav flex-column">
+            <li class="nav-item dropdown">
+                <li class="nav-item"><a class="nav-link" href="home.html"> <i class="fas fa-home"></i> Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="AgregarLibros.html"> <i class="fas fa-book"></i> Agregar Libros</a></li>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="prestamos.html"> <i class="fas fa-book-reader"></i> Préstamos</a></li>
+            <li class="nav-item"><a class="nav-link" href="AgregarPrestamo.html"> <i class="fas fa-bookmark"></i> Agregar Préstamo</a></li>
+            <li class="nav-item"><a class="nav-link" href="Devoluciones.html"> <i class="fas fa-undo"></i> Devoluciones</a></li>
+            <li class="nav-item"><a class="nav-link" href="Categorias.html"> <i class="fas fa-list"></i> Categorías</a></li>
+            <li class="nav-item"><a class="nav-link" href="CrearCategorias.html"> <i class="fa-solid fa-desktop">‌</i> Crear Categorías</a></li>
+            <li class="nav-item"><a class="nav-link" href="Profesores.html"> <i class="fas fa-chalkboard-teacher"></i> Profesores</a></li>
+            <li class="nav-item"><a class="nav-link" href="Estudiantes.html"> <i class="fas fa-user-graduate"></i> Estudiantes</a></li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user-shield"></i> Administradores
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="Administradores.html">Administradores</a></li>
+                </ul>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="Configuracion.html"> <i class="fas fa-cog"></i> Configuracion</a></li>
+        </ul>
+    </nav>
+
+    <div class="main-content">
+        <div class="container-form">
+            <h2 class="mb-4">Actualizar Libro</h2>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <form id="editarLibroForm" method="POST" enctype="multipart/form-data" action="../Consultas/updatelibros.php">
+                        <input type="hidden" id="libroId" name="id">
+
+                        <div class="mb-4">
+                            <label class="form-label">Título</label>
+                            <input type="text" class="form-control" id="titulo" name="titulo" required>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label">Autor</label>
+                            <input type="text" class="form-control" id="autor" name="autor" required>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label">Editorial</label>
+                            <input type="text" class="form-control" id="editorial" name="editorial">
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label">Año de Publicación</label>
+                            <input type="date" class="form-control" id="anio_publicacion" name="anio_publicacion" required>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label">ISBN</label>
+                            <input type="text" class="form-control" id="isbn" name="isbn" required>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label">Categoría</label>
+                            <select class="form-control" id="categoria" name="categoria">
+                                <option value="">Seleccione una categoría</option>
+                            </select>
+                        </div>
+                        
+                        
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label">Imagen del Libro</label>
+                            <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*">
+                            <img id="previewImage" class="preview-img mt-2" src="default-image.jpg">
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label">Cantidad Disponible</label>
+                            <input type="number" class="form-control" id="cantidad_disponible" name="cantidad_disponible">
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label">Estantería</label>
+                            <input type="text" class="form-control" id="estanteria" name="estanteria">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Actualizar Libro</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Editorial</th>
+                    <th>Fecha</th>
+                    <th>ISBN</th>
+                    <th>Cantidad</th>
+                    <th>Estantería</th>
+                    <th>Acción</th> 
+                </tr>
+            </thead>
+            <tbody id="librosTable"></tbody>
+        </table>
+    </div>
+    <div id="notification" class="notification"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const notification = document.getElementById('notification');
+    
+            if (urlParams.has('success')) {
+                showNotification(urlParams.get('success'), 'success');
+            } else if (urlParams.has('error')) {
+                showNotification(urlParams.get('error'), 'error');
+            }
+    
+            function showNotification(message, type) {
+                notification.textContent = decodeURIComponent(message);
+                notification.classList.add(type === 'error' ? 'error' : 'success');
+                notification.style.display = 'block';
+    
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                    history.replaceState(null, "", window.location.pathname); 
+                }, 3000);
+            }
+        });
+    </script>
+    
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch('../Consultas/listar_librosupdate.php') 
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = document.getElementById('librosTable');
+                    tableBody.innerHTML = '';
+                    data.libros.forEach(libro => {
+                        const row = `<tr>
+                            <td>${libro.titulo}</td>
+                            <td>${libro.editorial}</td>
+                            <td>${libro.anio_publicacion}</td>
+                            <td>${libro.isbn}</td>
+                            <td>${libro.cantidad_disponible}</td>
+                             <td>${libro.estanteria}</td>
+                            <td>
+                                <button class="btn btn-success btn-sm" onclick='cargarDatosFormulario(${JSON.stringify(libro)})'>
+                                    Seleccionar
+                                </button>
+                            </td>
+                        </tr>`;
+                        tableBody.innerHTML += row;
+                    });
+                })
+                .catch(error => console.error('Error al cargar los libros:', error));
+        });
+        
+        function cargarDatosFormulario(libro) {
+            document.getElementById('libroId').value = libro.id;
+            document.getElementById('titulo').value = libro.titulo;
+            document.getElementById('autor').value = libro.autor;
+            document.getElementById('editorial').value = libro.editorial;
+            document.getElementById('anio_publicacion').value = libro.anio_publicacion;
+            document.getElementById('isbn').value = libro.isbn;
+            document.getElementById('cantidad_disponible').value = libro.cantidad_disponible;
+            document.getElementById('estanteria').value = libro.estanteria;
+            
+            if (libro.imagen) {
+                document.getElementById('previewImage').src = libro.imagen;
+            }
+        }
+        </script>
+        
+
+
+        <script src="../js/cargarCategorias.js"></script>   
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    fetch('../Consultas/updatelibros.php')
+        .then(response => response.json())
+        .then(data => {
+            const tableBody = document.getElementById('librosTable');
+            tableBody.innerHTML = '';
+            data.forEach(libro => {
+                const row = `<tr>
+                    <td>${libro.titulo}</td>
+                    <td>${libro.editorial}</td>
+                    <td>${libro.anio_publicacion}</td>
+                    <td>${libro.isbn}</td>
+                    <td>${libro.cantidad_disponible}</td>
+                    <td><button class="btn btn-success btn-sm" onclick='cargarDatosFormulario(${JSON.stringify(libro)})'>Seleccionar</button></td>
+                </tr>`;
+                tableBody.innerHTML += row;
+            });
+        });
+});
+
+function cargarDatosFormulario(libro) {
+    document.getElementById('libroId').value = libro.id;
+    document.getElementById('titulo').value = libro.titulo;
+    document.getElementById('autor').value = libro.autor;
+    document.getElementById('editorial').value = libro.editorial;
+}
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        fetch('../Consultas/datos_usuario.php')
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    console.error(data.error);
+                    return;
+                }
+    
+                document.getElementById('user-name').innerText = data.usuario;
+                document.getElementById('user-role').innerText = data.rol;
+    
+                const userImage = document.getElementById('user-image');
+                userImage.src = data.imagen ? data.imagen : '../img/imgperfil.png';
+            })
+            .catch(error => {
+                console.error('Error al cargar los datos del usuario:', error);
+            });
+    });
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    if (localStorage.getItem('dark-mode') === 'enabled') {
+        document.body.classList.add('dark-mode');
+    }
+});
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+function cerrarSesion() {
+    fetch('../Consultas/cerrar_sesion.php')
+        .then(response => {
+            if (response.ok) {
+                window.location.href = "/SystemBiblio/BiblioVirtual/libros.html";
+            }
+        })
+        .catch(error => console.error('Error al cerrar sesión:', error));
+}
+</script>    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        fetch('../Consultas/auth.php', { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+            .then(response => response.json())
+            .then(data => {
+                if (!data.authenticated) {
+                    window.location.href = "/SystemBiblio/BiblioVirtual/libros.html";
+                }
+            })
+            .catch(error => console.error('Error verificando la sesión:', error));
+    });
+</script>
+
+<script>
+function cerrarSesion() {
+    fetch('../Consultas/cerrar_sesion.php')
+        .then(response => {
+            if (response.ok) {
+                window.location.href = "/SystemBiblio/BiblioVirtual/libros.html";
+            }
+        })
+        .catch(error => console.error('Error al cerrar sesión:', error));
+}
+</script>
+</body>
+</html>
+

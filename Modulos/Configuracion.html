@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuración - Biblioteca</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../css/configuracion.css">
+    <link rel="icon" type="image/png" href="../BiblioVirtual/img/logo.png"/>
+
+    <style>
+        body .sidebar {
+            background: linear-gradient(to bottom, #023577, #000000);
+        }
+
+        .dark-mode {
+            background-color: #121212;
+            color: white;
+        }
+
+        .dark-mode .btn-dark {
+            background-color: #555555;
+        }
+
+        .dark-mode .form-control {
+            background-color: #333333;
+            color: white;
+        }
+
+        .dark-mode .table {
+            background-color: #333333;
+            color: white;
+        }
+
+        .dark-mode .table-striped tbody tr:nth-of-type(odd) {
+            background-color: #444444;
+        }
+        .notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #28a745;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    display: none;
+    font-size: 16px;
+    z-index: 1000;
+}
+
+.notification.error {
+    background-color: #dc3545;
+}
+    </style>
+
+</head>
+
+<body>
+    <nav class="sidebar">
+        <div class="profile">
+            <img id="user-image" src="default-image.jpg" alt="Usuario" style="width: 150px; height: 150px; object-fit: cover;">
+            <h4 id="user-name">Cargando...</h4>
+            <p id="user-role">Cargando...</p>
+        </div>
+        <ul class="nav flex-column">
+            <li class="nav-item dropdown">
+                <li class="nav-item"><a class="nav-link" href="home.html"> <i class="fas fa-home"></i> Inicio</a></li>
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownLibros" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-book"></i> Agregar Libros
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownLibros">
+                    <li><a class="dropdown-item" href="AgregarLibros.html">Agregar Nuevo Libro</a></li>
+                    <li><a class="dropdown-item" href="EditarLibros.html">Editar Libros</a></li>
+                </ul>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="prestamos.html"> <i class="fas fa-book-reader"></i> Préstamos</a></li>
+            <li class="nav-item"><a class="nav-link" href="AgregarPrestamo.html"> <i class="fas fa-bookmark"></i> Agregar Préstamo</a></li>
+            <li class="nav-item"><a class="nav-link" href="Devoluciones.html"> <i class="fas fa-undo"></i> Devoluciones</a></li>
+            <li class="nav-item"><a class="nav-link" href="Categorias.html"> <i class="fas fa-list"></i> Categorías</a></li>
+            <li class="nav-item"><a class="nav-link" href="CrearCategorias.html"> <i class="fa-solid fa-desktop">‌</i> Crear Categorías</a></li>
+            <li class="nav-item"><a class="nav-link" href="Profesores.html"> <i class="fas fa-chalkboard-teacher"></i> Profesores</a></li>
+            <li class="nav-item"><a class="nav-link" href="Estudiantes.html"> <i class="fas fa-user-graduate"></i> Estudiantes</a></li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user-shield"></i> Administradores
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="Administradores.html">Administradores</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="main-content">
+        <button id="toggle-theme-btn" class="btn btn-secondary">
+            <i class="fas fa-moon"></i> Modo Lectura
+        </button>
+        
+        <h2 class="mt-4">Configuración del Usuario</h2>
+        <form action="../Consultas/guardar_cambios.php" method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="usuario" class="form-label">Nombre de Usuario</label>
+                <input type="text" class="form-control" id="usuario" name="usuario" value="ADMINISTRADOR" readonly>
+            </div>
+
+            <div class="mb-3">
+                <label for="rol" class="form-label">Rol</label>
+                <select class="form-control" id="rol" name="rol">
+                    <option value="Administrador">Administrador</option>
+                    <option value="Empleado">Empleado</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="imagen" class="form-label">Imagen de Perfil</label>
+                <div class="container">
+                    <img id="user-image" src="default-image.jpg" alt="Usuario" style="width: 150px; height: 150px; object-fit: cover;">
+                    <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*" onchange="previewImage(event)">
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+        </form>
+
+        <h3 class="mt-4">Administradores</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Usuario</th>
+                    <th>Rol</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody id="admin-table-body">
+            </tbody>
+        </table>
+    </div>
+    <div id="notification" class="notification"></div>
+
+
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const notification = document.getElementById('notification');
+    
+            if (urlParams.has('success')) {
+                showNotification(urlParams.get('success'), 'success');
+            } else if (urlParams.has('error')) {
+                showNotification(urlParams.get('error'), 'error');
+            }
+    
+            function showNotification(message, type) {
+                notification.textContent = decodeURIComponent(message);
+                notification.classList.add(type === 'error' ? 'error' : 'success');
+                notification.style.display = 'block';
+    
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                    history.replaceState(null, "", window.location.pathname); 
+                }, 3000);
+            }
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch('../Consultas/auth.php', { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.authenticated) {
+                        window.location.href = "/SystemBiblio/BiblioVirtual/libros.html";
+                    }
+                })
+                .catch(error => console.error('Error verificando la sesión:', error));
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('../Consultas/datos_usuario.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        console.error(data.error);
+                        return;
+                    }
+
+                    document.getElementById('user-name').innerText = data.usuario;
+                    document.getElementById('user-role').innerText = data.rol;
+                    document.getElementById('user-image').src = data.imagen ? data.imagen : '../img/imgperfil.png';
+
+                    if (data.rol === 'Empleado') {
+                        document.getElementById('usuario').closest('.mb-3').style.display = 'none';
+                        document.getElementById('rol').closest('.mb-3').style.display = 'none';
+
+                        const adminTable = document.querySelector('h3.mt-4');
+                        const adminTableContent = document.querySelector('.table');
+
+                        if (adminTable) adminTable.style.display = 'none';
+                        if (adminTableContent) adminTableContent.style.display = 'none';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al cargar los datos del usuario:', error);
+                });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('../Consultas/obtener_administradores.php')
+                .then(response => response.json())
+                .then(data => {
+                    const adminTableBody = document.getElementById('admin-table-body');
+                    data.forEach(admin => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${admin.usuario}</td>
+                            <td>${admin.rol}</td>
+                            <td><button class="btn btn-info" onclick="selectAdmin('${admin.usuario}', '${admin.rol}')">Seleccionar</button></td>
+                        `;
+                        adminTableBody.appendChild(row);
+                    });
+                })
+                .catch(error => console.error('Error al cargar los administradores:', error));
+        });
+
+        function selectAdmin(usuario, rol) {
+            document.getElementById('usuario').value = usuario;
+            document.getElementById('rol').value = rol;
+        }
+
+        function previewImage(event) {
+            const reader = new FileReader();
+            reader.onload = function () {
+                const output = document.getElementById('user-image');
+                output.src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
+    </script>
+        
+    
+        <script>
+ document.addEventListener('DOMContentLoaded', function () {
+
+    if (localStorage.getItem('dark-mode') === 'enabled') {
+        document.body.classList.add('dark-mode');
+    }
+
+
+    const toggleThemeBtn = document.getElementById('toggle-theme-btn');
+    if (toggleThemeBtn) {
+        toggleThemeBtn.addEventListener('click', function () {
+            document.body.classList.toggle('dark-mode');
+            
+
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('dark-mode', 'enabled');
+            } else {
+                localStorage.removeItem('dark-mode');
+            }
+        });
+    }
+});
+
+
+        </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+   
+    <script>
+        function cerrarSesion() {
+            fetch('../Consultas/cerrar_sesion.php')
+                .then(response => {
+                    if (response.ok) {
+                        window.location.href = "/SystemBiblio/BiblioVirtual/libros.html";
+                    }
+                })
+                .catch(error => console.error('Error al cerrar sesión:', error));
+        }
+    </script>
+</body>
+
+</html>
+

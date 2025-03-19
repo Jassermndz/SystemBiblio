@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>BIBLIOTECA VIRTUAL - JCV</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+    <link href="img/logonew.png" rel="icon">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<style>
+    .bg-primary {
+        background-color: #002efd !important;
+    }
+
+    .nav-item.nav-link:hover {
+        color: #001058 !important;
+    }
+
+    .usuario {
+        position: absolute;
+        left: 1px;  
+        top: 50%;     
+        transform: translateY(-50%); 
+    }
+
+    .col-md-6 {
+        padding-left: 20px; 
+    }
+
+    .text-white {
+        white-space: nowrap; 
+    }
+
+    .section-title::before {
+        position: absolute;
+        content: "";
+        top: -10px;
+        left: 0;
+        width: 100px;
+        height: 5px;
+        background: #0e009b;
+    }
+
+    .section-title::after {
+        position: absolute;
+        content: "";
+        top: -8px;
+        left: 0;
+        width: 100px;
+        height: 1px;
+        background: #0e009b;
+    }
+
+    .col-12 a {
+        color: rgb(2, 0, 150); 
+        text-decoration: none;
+    }
+
+    .col-12 a:hover, .col-12 a:focus, .col-12 a:active {
+        color: #0e009b; 
+    }
+
+    /* Contenedor principal */
+    .container-fluid {
+        position: relative;
+    }
+
+    /* Contenedor de los campos de búsqueda y categorías */
+    #buscarCategoriaContainer {
+        display: flex;
+        justify-content: flex-start; /* Los coloca al principio del contenedor */
+        align-items: center; /* Alinea verticalmente */
+        margin-bottom: 40px;
+        position: relative; /* Necesario para posicionar los elementos de forma manual */
+    }
+
+    /* Caja de texto de búsqueda */
+    #buscarLibro {
+        position: absolute;
+        right: 522px; /* Mueve el campo de búsqueda a la izquierda */
+        width: 300px; /* Puedes ajustar este valor según el tamaño deseado */
+        margin-top: 0px;
+    }
+
+    /* Botón de búsqueda */
+    #buscarLibroBtn {
+        position: absolute;
+        left: 45px; /* Ajusta esto para mover el botón a la derecha del campo de texto */
+        width: auto; /* El botón se ajustará a su tamaño natural */
+        margin-top: 0px;
+    }
+
+    /* Campo de categorías */
+    #categoria {
+        position: absolute;
+        left: 620px; /* Mueve el campo de categorías a la derecha */
+        width: 200px; /* Ajusta este valor según el tamaño deseado */
+        margin-top: 0px;
+    }
+
+    /* Responsividad */
+    @media (max-width: 768px) {
+        #buscarCategoriaContainer {
+            flex-direction: column; /* Los elementos se alinean de arriba a abajo */
+            align-items: flex-start; /* Alineación a la izquierda */
+            position: unset; /* Elimino la posición relativa */
+        }
+
+        #buscarLibro {
+            position: unset;
+            width: 100%; /* Hace que el campo de búsqueda ocupe todo el ancho */
+            margin-top: 10px;
+        }
+
+        #buscarLibroBtn {
+            position: unset;
+            width: 100%; /* Hace que el botón ocupe todo el ancho */
+            margin-top: 10px;
+        }
+
+        #categoria {
+            position: unset;
+            width: 100%; /* Hace que el campo de categorías ocupe todo el ancho */
+            margin-top: 10px;
+        }
+
+        .col-12 {
+            padding-left: 0; /* Elimina el padding a la izquierda para el campo de texto */
+            padding-right: 0; /* Elimina el padding a la derecha para el campo de texto */
+        }
+    }
+</style>
+<body>
+<div class="container-fluid bg-primary py-3">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-4 text-center text-lg-left mb-2 mb-lg-0">
+                <p class="usuario text-white" id="usuarioNombre" style="display: none;"></p>
+            </div>
+       
+            <div class="col-md-4 text-center mb-2 mb-lg-0">
+                <div class="d-inline-flex align-items-center justify-content-center">
+                    <a class="text-white pr-3" href="FAQS.html">FAQs</a>
+                    <span class="text-white">|</span>
+                    <a class="text-white px-3" href="">Ayuda</a>
+                    <span class="text-white">|</span>
+                    <a class="text-white px-3" href="">Soporte</a>
+                    <span class="text-white">|</span>
+                    <a href="IniciarSesion.html" id="iniciar-sesion" class="text-white px-3 d-none d-md-inline">Login</a> 
+                    <a href="../Consultas/CerrarSesionVirtual.php" id="cerrar-sesion" class="text-white px-3 d-none d-md-inline" style="display: none;">Cerrar sesión</a>
+                </div>
+            </div>
+  
+            <div class="col-md-4 text-center text-lg-right">
+                <div class="d-inline-flex align-items-center justify-content-center">
+                    <a class="text-white px-3" href="">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a class="text-white px-3" href="">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a class="text-white px-3" href="">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a class="text-white px-3" href="">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a class="text-white pl-3" href="">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="" style="background-color: #002efd;">
+    <div class="container-lg position-relative p-0 px-lg-3" style="z-index: 9;">
+        <nav class="navbar navbar-expand-lg navbar-light shadow p-lg-0" style="background-color: #FFD700;">
+            <a href="index.html" class="navbar-brand d-block d-lg-none">
+                <h1 class="m-0 display-4 text-primary"><span class="text-secondary">I</span>JCV</h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                <div class="navbar-nav ml-auto py-0">
+                    <a href="index.html" class="nav-item nav-link">Inicio</a>
+                    <a href="about.html" class="nav-item nav-link">Acerca de</a>
+                    <a href="libros.html" class="nav-item nav-link">Libros</a>
+                </div>
+   
+                <a href="index.html" class="navbar-brand mx-5 d-none d-lg-block">
+                    <h1 class="m-0 display-4 text-primary"><span class="text-secondary">I</span>JCV</h1>
+                </a>
+                
+                <div class="navbar-nav mr-auto py-0">
+                    <a href="service.html" class="nav-item nav-link">Carreras</a>
+                    <a href="gallery.html" class="nav-item nav-link">Galería</a>
+                    <a href="contact.html" class="nav-item nav-link">Contáctanos</a>
+                </div>
+                
+                <div class="col-12 text-center d-md-none"> 
+                    <div class="navbar-nav ml-auto py-0" style="background-color: black;"> 
+                        <a href="IniciarSesion.html" id="iniciar-sesion-mobile" class="nav-item nav-link text-white px-3">Login</a>
+                        <a href="../Consultas/CerrarSesionVirtual.php" id="cerrar-sesion-mobile" class="nav-item nav-link text-white px-3" style="display: none;">Cerrar sesión</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+
+    <div class="jumbotron jumbotron-fluid page-header" style="margin-bottom: 90px;">
+        <div class="container text-center py-5">
+            <h1 class="text-white display-3 mt-lg-5">Libros</h1>
+            <div class="d-inline-flex align-items-center text-white">
+                <p class="m-0"><a class="text-white" href="">Inicio</a></p>
+                <i class="fa fa-circle px-3"></i>
+                <p class="m-0">Libros</p>
+            </div>
+        </div>
+    </div>
+  
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <h1 class="section-title position-relative text-center mb-5">Libros Disponibles</h1>
+                    <div id="buscarCategoriaContainer">
+                        <!-- Campo de búsqueda a la izquierda -->
+                        <input type="text" id="buscarLibro" class="form-control me-2" placeholder="Buscar libro...">
+                        
+                        <!-- Botón de búsqueda al lado del campo de búsqueda -->
+                        <button class="btn btn-primary" id="buscarLibroBtn">
+                            <i class="fas fa-search"></i> Buscar
+                        </button>
+                        
+                        <!-- Campo de categorías a la derecha -->
+                        <select id="categoria" class="form-control ms-2">
+                            <option value="0">Seleccione una categoría</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="librosContainer"></div>
+        </div>
+    </div>
+    
+    
+    
+    
+ 
+    <div class="container-fluid footer bg-light py-5" style="margin-top: 90px;">
+        <div class="container text-center py-5">
+            <div class="row">
+                <div class="col-12 mb-4">
+                    <a href="index.html" class="navbar-brand m-0">
+                        <h1 class="m-0 mt-n2 display-4 text-primary"><span class="text-secondary">I</span>JCV</h1>
+                    </a>
+                </div>
+                <div class="col-12 mb-4">
+                    <a class="btn btn-outline-secondary btn-social mr-2" href="#"><i class="fab fa-twitter"></i></a>
+                    <a class="btn btn-outline-secondary btn-social mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a class="btn btn-outline-secondary btn-social mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a class="btn btn-outline-secondary btn-social" href="https://www.instagram.com/pearlpirates_504?igsh=MTd5N3JnNnVpaGZ6NQ%3D%3D&utm_source=qr"><i class="fab fa-instagram"></i></a>
+                </div>
+                <div class="col-12 mt-2 mb-4">
+                    <div class="row">
+                        <div class="col-sm-6 text-center text-sm-right border-right mb-3 mb-sm-0">
+                            <h5 class="font-weight-bold mb-2">Toca aqui</h5>
+                            <p class="mb-2">Barrio Nueva Esperanza</p>
+                            <p class="mb-0">+012 345 67890</p>
+                        </div>
+                        <div class="col-sm-6 text-center text-sm-left">
+                            <h5 class="font-weight-bold mb-2">Abierto</h5>
+                            <p class="mb-2">Lun – Sab, 7AM – 5PM</p>
+                            <p class="mb-0">Domingo: Cerrado</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <p class="m-0">&copy; <a href="#">Dominio</a>. Derechos reservados <a href="mailto:pearlpirates504@gmail.com">The BlacK Pearl (S.A)</a></p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="#" class="btn btn-secondary px-2 back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/isotope/isotope.pkgd.min.js"></script>
+    <script src="lib/lightbox/js/lightbox.min.js"></script>
+
+    <script src="mail/jqBootstrapValidation.min.js"></script>
+    <script src="mail/contact.js"></script>
+
+    <script src="js/main.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: '../Consultas/session.php',  
+                type: 'GET',
+                success: function (response) {
+                    if (response) {
+                        $('.usuario').text('Hola, ' + response);
+                        $('#cerrar-sesion').show(); 
+                    } else {
+                        $('#iniciar-sesion').show();  
+                    }
+                }
+            });
+        });
+        
+        document.addEventListener('DOMContentLoaded', function () {
+    const categoriaSelect = document.getElementById('categoria');
+    const librosContainer = document.getElementById('librosContainer');
+    let usuarioLogueado = false; 
+
+    function verificarSesion() {
+        return fetch('../Consultas/session.php')
+            .then(response => response.text())
+            .then(data => {
+                if (data.trim() !== '') {
+                    usuarioLogueado = true;
+                }
+            })
+            .catch(error => console.error('Error al verificar sesión:', error));
+    }
+
+    
+    function cargarLibros(categoriaId = null, consulta = "") {
+        let url = '../Consultas/cargarlibros.php';
+        if (categoriaId && categoriaId !== 0) {
+            url += `?categoria_id=${categoriaId}`;
+        } else if (consulta !== "") {
+            url += `?buscar=${consulta}`;
+        }
+
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                if (data.libros.length === 0) {
+                    librosContainer.innerHTML = '<p>No hay libros disponibles para esta categoría.</p>';
+                } else {
+                    librosContainer.innerHTML = '';
+                    data.libros.forEach(libro => {
+                        const card = document.createElement('div');
+                        card.classList.add('col-lg-3', 'col-md-6', 'mb-4', 'pb-2');
+                        const imagenSrc = libro.imagen ? `../${libro.imagen}` : 'default-image.jpg';
+
+                        card.innerHTML = `
+                        <div class="product-item d-flex flex-column align-items-center text-center bg-light rounded py-5 px-3">
+                            <div class="bg-primary mt-n5 py-3" style="width: 80px;">
+                                <h4 class="font-weight-bold text-white mb-0">${libro.anio_publicacion}</h4>
+                            </div>
+                            <div class="position-relative bg-primary rounded-circle mt-n3 mb-4 p-3" style="width: 150px; height: 150px;">
+                                <img class="rounded-circle w-100 h-100" src="${imagenSrc}" style="object-fit: cover;" alt="${libro.titulo}">
+                            </div>
+                            <h5 class="font-weight-bold mb-4">${libro.titulo}</h5>
+                            <p class="font-weight-bold mb-4">${libro.autor}</p>
+                            <p class="font-weight-bold mb-4">${libro.categoria_nombre}</p>
+                            <a href="#" class="btn btn-sm btn-secondary leer-btn" data-id="${libro.id}">Leer</a>
+                        </div>
+                    `;
+                        librosContainer.appendChild(card);
+                    });
+
+                    document.querySelectorAll('.leer-btn').forEach(button => {
+                        button.addEventListener('click', function (e) {
+                            e.preventDefault();
+                            if (!usuarioLogueado) {
+                                window.location.href = 'CrearCuenta.html'; 
+                                return;
+                            }
+                            const libroId = this.getAttribute('data-id');
+                            window.location.href = `../Consultas/obtenerLibro.php?id=${libroId}`;
+                        });
+                    });
+                }
+
+                if (data.categorias) {
+                    categoriaSelect.innerHTML = '<option value="0">Todas</option>';
+                    data.categorias.forEach(categoria => {
+                        const option = document.createElement('option');
+                        option.value = categoria.id;
+                        option.textContent = categoria.nombre;
+                        categoriaSelect.appendChild(option);
+                    });
+                }
+            })
+            .catch(error => console.error('Error al cargar los libros:', error));
+    }
+
+    verificarSesion().then(() => {
+        cargarLibros();
+    });
+
+    document.getElementById('categoria').addEventListener('change', function () {
+        const categoriaId = parseInt(this.value);
+        cargarLibros(categoriaId === 0 ? null : categoriaId);
+    });
+
+    document.getElementById('buscarLibroBtn').addEventListener('click', function () {
+        const consulta = document.getElementById('buscarLibro').value;
+        cargarLibros(null, consulta);
+    });
+});
+
+    </script>
+
+
+<script>
+
+let usuarioLogueado = true;  
+
+if (usuarioLogueado) {
+    document.getElementById("usuarioNombre").style.display = "block"; 
+    document.getElementById("usuarioNombreResponsive").style.display = "block"; 
+    document.getElementById("usuarioNombre").textContent = "Nombre del Usuario"; 
+    
+    document.getElementById("iniciar-sesion").style.display = "none";  
+    document.getElementById("iniciar-sesion-mobile").style.display = "block";  
+    document.getElementById("cerrar-sesion").style.display = "block"; 
+    document.getElementById("cerrar-sesion-mobile").style.display = "block"; 
+} else {
+
+    document.getElementById("iniciar-sesion").style.display = "block";  
+    document.getElementById("iniciar-sesion-mobile").style.display = "block"; 
+    document.getElementById("cerrar-sesion").style.display = "block"; 
+    document.getElementById("cerrar-sesion-mobile").style.display = "block"; 
+}
+
+</script>
+</body>
+</html>

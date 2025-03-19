@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Usuario - Administración</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/crearusuarios.css">
+    <link rel="icon" type="image/png" href="../BiblioVirtual/img/logo.png"/>
+    <style>
+body {
+    display: flex;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.sidebar {
+    height: 100vh;
+    position: fixed;
+    width: 250px;
+    background: linear-gradient(to bottom, #023577, #000000); 
+    padding-top: 20px;
+}
+
+.sidebar .profile {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.sidebar .profile img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    object-fit: cover;
+}
+
+.sidebar .profile h4 {
+    color: white;
+    margin-bottom: 0;
+}
+
+.sidebar .profile p {
+    color: #ccc;
+    font-size: 14px;
+}
+
+.sidebar .nav-link {
+    color: white;
+    padding: 15px;
+    font-size: 16px;
+}
+
+.sidebar .nav-link:hover {
+    background-color: #495057;
+}
+
+.main-content {
+    margin-left: 250px;
+    padding: 20px;
+    width: calc(100% - 250px);
+}
+
+.logout-btn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: red;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.logout-btn:hover {
+    color: darkred;
+}
+
+#container {
+    min-width: 300px;
+    max-width: 800px;
+    height: 800px;
+    margin: 0 auto;
+}
+
+.chart-container {
+    width: 800px; 
+    height: 500px;
+    margin: 20px auto; 
+}
+
+        .content {
+            margin-left: 600px;
+            padding: 20px;
+            
+        }
+        
+        body.dark-mode {
+            background-color: #121212;
+            color: white;
+        }
+        
+        body.dark-mode .sidebar {
+            background-color: #333;
+        }
+        
+        body.dark-mode .card {
+            background-color: #444;
+            color: white;
+        }
+        .notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #28a745;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    display: none;
+    font-size: 16px;
+    z-index: 1000;
+}
+
+.notification.error {
+    background-color: #dc3545;
+}
+    </style>
+</head>
+
+<body>
+    <nav class="sidebar">
+        <div class="profile text-center">
+            <img id="user-image" src="default-image.jpg" alt="Usuario" style="width: 150px; height: 150px; object-fit: cover;" class="rounded-circle">
+            <h4 id="user-name">Cargando...</h4>
+            <p id="user-role">Cargando...</p>
+        </div>
+        <ul class="nav flex-column">
+            <li class="nav-item"><a class="nav-link" href="home.html"><i class="fas fa-home"></i> Inicio</a></li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownLibros" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-book"></i> Libros
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownLibros">
+                    <li><a class="dropdown-item" href="AgregarLibros.html">Agregar Nuevo Libro</a></li>
+                    <li><a class="dropdown-item" href="EditarLibros.html">Editar Libros</a></li>
+                </ul>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="prestamos.html"><i class="fas fa-book-reader"></i> Préstamos</a></li>
+            <li class="nav-item"><a class="nav-link" href="AgregarPrestamo.html"><i class="fas fa-bookmark"></i> Agregar Préstamo</a></li>
+            <li class="nav-item"><a class="nav-link" href="Devoluciones.html"><i class="fas fa-undo"></i> Devoluciones</a></li>
+            <li class="nav-item"><a class="nav-link" href="Categorias.html"><i class="fas fa-list"></i> Categorías</a></li>
+            <li class="nav-item"><a class="nav-link" href="CrearCategorias.html"> <i class="fa-solid fa-desktop">‌</i> Crear Categorías</a></li>
+            <li class="nav-item"><a class="nav-link" href="Profesores.html"> <i class="fas fa-chalkboard-teacher"></i> Profesores</a></li>
+            <li class="nav-item"><a class="nav-link" href="Estudiantes.html"> <i class="fas fa-user-graduate"></i> Estudiantes</a></li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user-shield"></i> Administradores
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="CrearUsuarios.html">Crear Usuario</a></li>
+                    <li><a class="dropdown-item" href="EditarUsuarios.html">Editar Usuarios</a></li>
+                    <li><a class="dropdown-item" href="Administradores.html">Administradores</a></li>
+                </ul>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="Configuracion.html"><i class="fas fa-cog"></i> Configuración</a></li>
+        </ul>
+    </nav>
+    
+    <div class="content">
+        <div class="container d-flex justify-content-end">
+            <div class="card card-custom ms-auto" style="width: 600px;">    
+                    <h3>Crear Nuevo Usuario</h3>
+                <div class="card-body">
+                    <form action="../Consultas/crear_usuarios.php" method="POST">
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" required placeholder="Ingrese el nombre completo del usuario">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Correo Electrónico</label>
+                            <input type="email" class="form-control" id="email" name="email" required placeholder="Ingrese el correo electrónico">
+                        </div>
+                        <div class="mb-3">
+                            <label for="telefono" class="form-label">Teléfono</label>
+                            <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Ingrese el número de teléfono">
+                        </div>
+                        <div class="mb-3">
+                            <label for="direccion" class="form-label">Dirección</label>
+                            <textarea class="form-control" id="direccion" name="direccion" rows="3" placeholder="Ingrese la dirección del usuario"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="tipo" class="form-label">Tipo de Usuario</label>
+                            <select class="form-control" id="tipo" name="tipo" required>
+                                <option value="Estudiante">Estudiante</option>
+                                <option value="Profesor">Profesor</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-custom w-100">Crear Usuario</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="notification" class="notification"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const notification = document.getElementById('notification');
+    
+            if (urlParams.has('success')) {
+                showNotification(urlParams.get('success'), 'success');
+            } else if (urlParams.has('error')) {
+                showNotification(urlParams.get('error'), 'error');
+            }
+    
+            function showNotification(message, type) {
+                notification.textContent = decodeURIComponent(message);
+                notification.classList.add(type === 'error' ? 'error' : 'success');
+                notification.style.display = 'block';
+    
+                setTimeout(() => {
+                    notification.style.display = 'none';
+                    history.replaceState(null, "", window.location.pathname); 
+                }, 3000);
+            }
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('../Consultas/datos_usuario.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        console.error(data.error);
+                        return;
+                    }
+        
+                    document.getElementById('user-name').innerText = data.usuario;
+                    document.getElementById('user-role').innerText = data.rol;
+        
+                    const userImage = document.getElementById('user-image');
+                    userImage.src = data.imagen ? data.imagen : '../img/imgperfil.png';
+                })
+                .catch(error => {
+                    console.error('Error al cargar los datos del usuario:', error);
+                });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (localStorage.getItem('dark-mode') === 'enabled') {
+                document.body.classList.add('dark-mode');
+            }
+        });
+    </script>
+</body>
+</html>
+

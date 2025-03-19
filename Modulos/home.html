@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Biblioteca</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../css/home.css">
+    <link rel="icon" type="image/png" href="../BiblioVirtual/img/logo.png"/>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+body .sidebar {
+    background: linear-gradient(to bottom, #023577, #000000);
+}
+
+body.dark-mode {
+    background-color: #121212; 
+    color: white; 
+}
+
+body.dark-mode .sidebar {
+    background-color: #333; 
+}
+
+body.dark-mode .card {
+    background-color: #444; 
+    color: white;
+}
+
+.container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.container .glass {
+  position: relative;
+  width: 180px;
+  height: 200px;
+  background: linear-gradient(#fff2, transparent);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 25px 25px rgba(0, 0, 0, 0.25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+  border-radius: 10px;
+  margin: 0 -45px;
+  backdrop-filter: blur(10px);
+  transform: rotate(calc(var(--r) * 1deg));
+  color: black; 
+}
+
+body.dark-mode .glass {
+  color: white; 
+}
+
+.container:hover .glass {
+  transform: rotate(0deg);
+  margin: 0 10px;
+}
+
+.container .glass::before {
+  content: attr(data-text);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.05);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black; 
+}
+
+body.dark-mode .glass::before {
+  color: white; 
+}
+
+.chart-container {
+    margin-bottom: 40px; 
+}
+
+.container .glass svg {
+  font-size: 2.5em;
+  fill: black; 
+}
+body.dark-mode .glass svg {
+  fill: white; 
+}
+
+    </style>
+</head>
+
+<body>
+    <button class="logout-btn" onclick="cerrarSesion()">
+        <i class="fas fa-power-off"></i>
+    </button>
+
+    <nav class="sidebar">
+        <div class="profile">
+            <img id="user-image" src="default-image.jpg" alt="Usuario" style="width: 150px; height: 150px; object-fit: cover;">
+            <h4 id="user-name">Cargando...</h4>
+            <p id="user-role">Cargando...</p>
+        </div>
+        <ul class="nav flex-column">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownLibros" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-book"></i> Agregar Libros
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownLibros">
+                    <li><a class="dropdown-item" href="AgregarLibros.html">Agregar Nuevo Libro</a></li>
+                    <li><a class="dropdown-item" href="EditarLibros.html">Editar Libros</a></li>
+                </ul>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="prestamos.html"> <i class="fas fa-book-reader"></i> Préstamos</a></li>
+            <li class="nav-item"><a class="nav-link" href="AgregarPrestamo.html"> <i class="fas fa-bookmark"></i> Agregar Préstamo</a></li>
+            <li class="nav-item"><a class="nav-link" href="Devoluciones.html"> <i class="fas fa-undo"></i> Devoluciones</a></li>
+            <li class="nav-item"><a class="nav-link" href="Categorias.html"> <i class="fas fa-list"></i> Categorías</a></li>
+            <li class="nav-item"><a class="nav-link" href="CrearCategorias.html"> <i class="fa-solid fa-desktop">‌</i> Crear Categorías</a></li>
+            <li class="nav-item"><a class="nav-link" href="Profesores.html"> <i class="fas fa-chalkboard-teacher"></i> Profesores</a></li>
+            <li class="nav-item"><a class="nav-link" href="Estudiantes.html"> <i class="fas fa-user-graduate"></i> Estudiantes</a></li>
+            <li class="nav-item"><a class="nav-link" href="EditarUsuarios.html"> <i class="fas fa-user-graduate"></i> Actualizar Usuarios</a></li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user-shield"></i> Administradores
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="Administradores.html">Administradores</a></li>
+                </ul>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="Configuracion.html"> <i class="fas fa-cog"></i> Configuracion</a></li>
+        </ul>
+    </nav>
+
+      
+    <div class="main-content">
+        <h2 class="mt-4">Panel de Administración</h2>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card text-white bg-info mb-3">
+                    <div class="card-body text-center">
+                        <h5 class="card-title"><i class="fa-solid fa-users"></i> Usuarios</h5>
+                        <p id="usuarios" class="card-text">Cargando...</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-white bg-primary mb-3">
+                    <div class="card-body text-center">
+                        <h5 class="card-title"><i class="fa-solid fa-book"></i> Libros</h5>
+                        <p id="libros" class="card-text">Cargando...</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-white bg-warning mb-3">
+                    <div class="card-body text-center">
+                        <h5 class="card-title"><i class="fa-solid fa-pen"></i> Autores</h5>
+                        <p id="autores" class="card-text">Cargando...</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-white bg-danger mb-3">
+                    <div class="card-body text-center">
+                        <h5 class="card-title"><i class="fa-solid fa-building"></i> Editoriales</h5>
+                        <p id="editoriales" class="card-text">Cargando...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="chart-container">
+            <canvas id="miGrafica"></canvas>
+          
+            <div class="container">
+              <a href="https://github.com/Jassermndz" target="_blank" data-text="Github" style="--r:-15;" class="glass">
+                <svg viewBox="0 0 496 512" height="1em" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"
+                  ></path>
+                </svg>
+              </a>
+         
+              <a href="https://github.com/Jassermndz/SystemBiblio" target="_blank" data-text="Code" style="--r:5;" class="glass">
+                <svg viewBox="0 0 640 512" height="1em" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6zm80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3L562.7 256l-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.7 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3z"
+                  ></path>
+                </svg>
+              </a>
+          
+
+              <a href="https://earn.com" target="_blank" data-text="Earn" style="--r:25;" class="glass">
+                <svg viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M64 64C28.7 64 0 92.7 0 128V384c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V128c0-35.3-28.7-64-64-64H64zm64 320H64V320c35.3 0 64 28.7 64 64zM64 192V128h64c0 35.3-28.7 64-64 64zM448 384c0-35.3 28.7-64 64-64v64H448zm64-192c-35.3 0-64-28.7-64-64h64v64zM288 160a96 96 0 1 1 0 192 96 96 0 1 1 0-192z"
+                  ></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+          
+    
+    <script>
+        fetch('../Consultas/consultar_estadisticas.php')
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    console.error(data.error);
+                } else {
+                    document.getElementById('usuarios').innerText = data.total_usuarios;
+                    document.getElementById('libros').innerText = data.total_libros;
+                    document.getElementById('autores').innerText = data.total_autores;
+                    document.getElementById('editoriales').innerText = data.total_editoriales;
+                }
+            })
+            .catch(error => console.error('Error al obtener las estadísticas:', error));
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('../Consultas/datos_usuario.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        console.error(data.error);
+                        return;
+                    }
+        
+                    document.getElementById('user-name').innerText = data.usuario;
+                    document.getElementById('user-role').innerText = data.rol;
+        
+                    const userImage = document.getElementById('user-image');
+                    userImage.src = data.imagen ? data.imagen : '../img/imgperfil.png';
+                })
+                .catch(error => {
+                    console.error('Error al cargar los datos del usuario:', error);
+                });
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch('../Consultas/auth.php', { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.authenticated) {
+                        window.location.href = "/SystemBiblio/BiblioVirtual/libros.html";
+                    }
+                })
+                .catch(error => console.error('Error verificando la sesión:', error));
+        });
+    </script>
+    
+<script>
+    function cerrarSesion() {
+        fetch('../Consultas/cerrar_sesion.php')
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = "/SystemBiblio/BiblioVirtual/libros.html";
+                }
+            })
+            .catch(error => console.error('Error al cerrar sesión:', error));
+    }
+</script>
+
+<script>
+    window.history.pushState(null, "", window.location.href);
+    window.onpopstate = function () {
+        window.history.pushState(null, "", window.location.href);
+    };
+</script>
+
+<script>
+    fetch('../Consultas/consultar_estadisticas.php')
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                console.error("Error en la consulta:", data.error);
+                return;
+            }
+    
+            let totalUsuarios = data.total_usuarios;
+            let totalLibros = data.total_libros;
+            let totalAutores = data.total_autores;
+            let totalEditoriales = data.total_editoriales;
+    
+            let ctx = document.getElementById('miGrafica').getContext('2d');
+            let miGrafica = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Usuarios', 'Libros', 'Autores', 'Editoriales'],
+                    datasets: [{
+                        label: 'Estadísticas',
+                        data: [totalUsuarios, totalLibros, totalAutores, totalEditoriales],
+                        backgroundColor: [
+                            'rgba(54, 162, 235, 0.5)', 
+                            'rgba(255, 99, 132, 0.5)', 
+                            'rgba(75, 192, 192, 0.5)', 
+                            'rgba(153, 102, 255, 0.5)' 
+                        ],
+                        borderColor: [
+                            'rgba(54, 162, 235, 1)', 
+                            'rgba(255, 99, 132, 1)', 
+                            'rgba(75, 192, 192, 1)', 
+                            'rgba(153, 102, 255, 1)' 
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false, 
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    onClick: (e) => {
+                        const activePoints = miGrafica.getElementsAtEventForMode(e, 'nearest', { intersect: true }, false);
+                        if (activePoints.length > 0) {
+                            const datasetIndex = activePoints[0].datasetIndex;
+                            const index = activePoints[0].index;
+                            const label = miGrafica.data.labels[index];
+                            const value = miGrafica.data.datasets[datasetIndex].data[index];
+                            alert(`Estadística seleccionada: ${label}\nValor: ${value}`);
+                        }
+                    }
+                }
+            });
+        })
+        .catch(error => console.error("Error en la petición:", error));
+</script>
+    
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        if (localStorage.getItem('dark-mode') === 'enabled') {
+            document.body.classList.add('dark-mode');
+        }
+    });
+</script>
+
+<script>
+    
+</script>
+
+</body>
+
+</html>
